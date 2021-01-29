@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" href="#">
+		<img alt="WebControl" th:src="@{/images/logo.png}" width="200px" height="35px">	
+	</a>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto float-left">
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Menu
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	          <a class="dropdown-item" href="#">pagina 1</a>
+	          <a class="dropdown-item" href="#">pagina 2</a>
+	          <div class="dropdown-divider"></div>
+	          <a class="dropdown-item" href="#">pagina 3</a>
+	        </div>
+	      </li>
+	    </ul>
+    </div>
+	<div class="text-white form-inline">
+        <i class="fas fa-hotel fa-lg"></i>&nbsp;<span th:text="'[' + ${usuario} + ']'"></span>&nbsp;
+        <i class="fas fa-user fa-lg"></i>&nbsp;<span th:text="'[' + ${empresa} + ']'"></span>&nbsp;
+        <form id="formSair" th:action="@{/logout}" method="POST">
+        	<a id="btnSair" href="#" class="nav-link" style="color: white;">
+        		Sair
+        	</a>
+        </form>
+    </div>
+</nav>
+<script>
+	document.getElementById("btnSair").onclick = function() {
+	    document.getElementById("formSair").submit();
+	}
+</script>
+</html>

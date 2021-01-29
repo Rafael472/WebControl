@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{LayoutPadrao}">
+<head>
+	<title>Cadastro Usuario</title>
+</head>
+<section layout:fragment="conteudo">
+	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+		<span th:text="${mensagem}">Mensagem vem do Controller</span>
+	</div>
+	<form class="card" method="POST" action="/usuario">
+		<h5 class="card-header">Cadastro de Usuário</h5>
+		<div class="card-body">
+			<div class="form-group">
+			    <label for="txtUsuario">Usuário</label>
+			    <input type="text" required class="form-control col-md-6" id="txtUsuario" name="usuario" placeholder="Usuario">
+		  	</div>
+		  	<div class="form-group">
+			    <label for="txtSenha">Senha</label>
+			    <input type="text" required class="form-control col-md-6" id="txtSenha" name="senha" placeholder="Senha">
+		  	</div>
+		  	<div class="form-group">
+			    <label for="txtEmail">E-mail</label>
+			    <input type="email" required class="form-control col-md-6" id="txtEmail" name="email" placeholder="nome@exemplo.com">
+		  	</div>
+		  	<div class="form-group">
+				<label for="dataCadastro" class="">Data de Cadastro</label>
+				<div>
+					<input type="text" required class="form-control col-sm-2"	id="dataCadastro" name="dataCadastro"
+						data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+						data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="auto"
+						placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10"/>
+				</div>
+			</div>
+		  	<div class="form-group">
+		    	<label for="ddlSituacao">Situação</label>
+		    	<select class="form-control col-sm-2" id="ddlSituacao" name="status">
+		      		<option th:each="status : ${todosStatusUsuario}" th:value="${status}" th:text="${status.descricao}"></option>
+		    	</select>
+		  	</div>
+		  	<div class="form-group">
+				<button type="submit" class="btn btn-primary col-sm-1">Salvar</button>
+				<button type="submit" class="btn btn-secondary col-sm-1">Cancelar</button>
+			</div>
+	  	</div>
+	</form>
+</section>
+</html>
