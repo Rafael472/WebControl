@@ -8,11 +8,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.SystemsSolutions.WebControl.model.Seguranca;
 
 @Controller
-//@RequestMapping("/WebControl")
 public class InicioController {
 	Seguranca seguranca = new Seguranca();
 	
-	@RequestMapping({"/", "/inicio"})
+	@RequestMapping({"/", "/home"})
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("Inicio");
 		return mv;

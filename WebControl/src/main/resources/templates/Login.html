@@ -41,9 +41,9 @@
 				height="72">
 			<h1 class="h3 mb-3 font-weight-normal">Entrar</h1>
 			<label for="inputEmail" class="sr-only">E-mail</label>
-			<input type="text" id="username	" class="form-control" placeholder="Usuario" required autofocus name="username" th:value="${usuario?.getUsuario()}"/>
+			<input type="text" id="username	" class="form-control" placeholder="Usuario" required autofocus name="usuario" th:value="${usuario?.getUsuario()}"/>
 			<label for="inputPassword" class="sr-only">Senha</label>
-			<input type="password" id="password" class="form-control" placeholder="Senha" required name="password" th:value="${usuario?.getSenha()}"/>
+			<input type="password" id="password" class="form-control" placeholder="Senha" required name="senha" th:value="${usuario?.getSenha()}"/>
 			<div class="checkbox mb-3">
 				<a href="/RecupSenha.html">Esqueceu a Senha?</a>
 			</div>

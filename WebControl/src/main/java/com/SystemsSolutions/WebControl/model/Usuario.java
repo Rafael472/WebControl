@@ -54,8 +54,8 @@ public class Usuario {
 	) //criar a tabela usuarios_tem_perfis
 	private List<Perfil> perfis;
 	
-	@Column(name = "ativo", nullable = false, columnDefinition = "TINYINT(1)")
-	private boolean ativo;
+	//@Column(name = "ativo", nullable = false, columnDefinition = "TINYINT(1)")
+	//private boolean ativo;
 	
 	@Column(name = "DATA_CADASTRO", unique = false, nullable = false)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -84,7 +84,9 @@ public class Usuario {
 	public void setHoraAlteracao(Date horaAlteracao) {
 		this.horaAlteracao = horaAlteracao;
 	}
+	
 	@Enumerated(EnumType.STRING)
+	@Column(name = "STATUS", nullable = false)
 	private StatusUsuario status;
 
 	

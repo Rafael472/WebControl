@@ -36,9 +36,11 @@ public class UsuarioServices implements UserDetailsService{
 		return repository.findByUsuario(usuario);
 	}
 
-	@Override
+	@Override @Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String user) throws UsernameNotFoundException {
 		Usuario usuario = buscarPorUsuario(user);
+		System.out.println("Usuário encontrado: " + usuario.getUsuario()
+						+  "\nSenha: " + usuario.getSenha());
 		return new User(
 				usuario.getUsuario(),
 				usuario.getSenha(),
