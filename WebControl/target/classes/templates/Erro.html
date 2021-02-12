@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{LayoutPadrao}">
+<head>
+<title>ERRO!</title>
+</head>
+<section layout:fragment="conteudo">
+	<div class="album py-5">
+	    <div class="container">
+	        <div class="text-center">
+	            <h1 class="h3 mb-3 font-weight-normal">
+	                <i class="oi oi-warning"></i>
+	                <span th:text="${status}"></span>
+	            </h1>
+	
+	            <i class="fas fa-user-lock"></i>
+	            <h5 class="text-danger" th:text="${error}"></h5>
+	
+	            <div>
+	                <span th:text="${message}"></span><br/><br/>
+	                <a class="btn btn-primary" type="button" href="javascript:history.back()">Voltar a página anterior</a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</section>
+</html>

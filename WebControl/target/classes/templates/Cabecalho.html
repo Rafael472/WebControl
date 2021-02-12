@@ -4,37 +4,61 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<a class="navbar-brand" href="#">
+	<a class="navbar-brand" href="/">
 		<img alt="WebControl" th:src="@{/images/logo.png}" width="200px" height="35px">	
 	</a>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto float-left">
-	      <li class="nav-item dropdown">
+		<!-- MENU -->
+	      <li class="nav-item dropdown" sec:authorize="hasAuthority('ADMIN')">
 	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          Menu
+	          Administrador
 	        </a>
-	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	          <a class="dropdown-item" href="#">pagina 1</a>
-	          <a class="dropdown-item" href="#">pagina 2</a>
-	          <div class="dropdown-divider"></div>
-	          <a class="dropdown-item" href="#">pagina 3</a>
-	        </div>
-	      </li>
+	        <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdown">
+        		<li class="nav-link dropdown">
+					<a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Usuario</a>
+		          	<ul class="dropdown-menu">
+		          		<li class="nav-link dropdown">
+			          		<a class="dropdown-item" href="/usuario">Cadastro</a>
+			          	</li>
+		          	</ul>
+				</li>
+				<!-- ADICIONAR <li> ABAIXO (ANTES DO </ul>) PARA MAIS LINHAS NO MENU -->
+	        </ul>
+	        <!-- FIM MENU -->
 	    </ul>
     </div>
 	<div class="text-white form-inline">
-        <i class="fas fa-hotel fa-lg"></i>&nbsp;<span th:text="'[' + ${usuario} + ']'"></span>&nbsp;
-        <i class="fas fa-user fa-lg"></i>&nbsp;<span th:text="'[' + ${empresa} + ']'"></span>&nbsp;
-        <form id="formSair" th:action="@{/logout}" method="POST">
-        	<a id="btnSair" href="#" class="nav-link" style="color: white;">
-        		Sair
-        	</a>
-        </form>
+        <span sec:authorize="isAuthenticated()" sec:authentication="name"></span>&nbsp;&nbsp;
+        <span sec:authorize="!isAuthenticated()">USUÁRIO NÃO LOGADO!</span>
     </div>
+    <form id="formSair" th:action="@{/logout}" method="POST">
+    	<a id="btnSair" href="#" class="nav-link" style="color: white;">
+    		Sair
+    	</a>
+    </form>
 </nav>
 <script>
 	document.getElementById("btnSair").onclick = function() {
 	    document.getElementById("formSair").submit();
 	}
 </script>
+
+<style>
+	.dropdown-menu a:hover {
+		background-color: #d1d1d1;
+	}
+	.dropdown:hover>.dropdown-menu {
+		display: block;
+		margin-top: 0px;
+		margin-left: 0px;
+		padding: 0pt;
+	}
+	.dropdown>.dropdown-toggle:active {
+		pointer-events: none;
+	}
+	.dropdown-item:hover {
+		border-radius: 3px;
+	}
+</style>
 </html>

@@ -35,17 +35,27 @@ public class UsuarioServices implements UserDetailsService{
 	public Usuario buscarPorUsuario(String usuario) {
 		return repository.findByUsuario(usuario);
 	}
-
+	
+	public Usuario buscarPorEmail(String email) {
+		return repository.findByEmail(email);
+	}
+	
 	@Override @Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String user) throws UsernameNotFoundException {
 		Usuario usuario = buscarPorUsuario(user);
 		System.out.println("Usuário encontrado: " + usuario.getUsuario()
-						+  "\nSenha: " + usuario.getSenha());
+						+  "\nSenha: " + usuario.getSenha()
+						+  "\nStatus: " + usuario.getStatus());
+		
+		if(usuario.getStatus().toString().equals("BLOQUEADO") || usuario.getStatus().toString().equals("PENDENTE")) {
+			usuario = null;
+		}
+		
 		return new User(
 				usuario.getUsuario(),
 				usuario.getSenha(),
 				AuthorityUtils.createAuthorityList(getAuthorities(usuario.getPerfis()))
-				);
+		);
 	}
 	
 	private String[] getAuthorities(List<Perfil> perfis) {

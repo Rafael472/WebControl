@@ -11,4 +11,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	//nome da coluna deve ser identico ao nome do atributo da classe
 	@Query("SELECT u FROM Usuario u WHERE u.usuario = :usuarioParam")
 	Usuario findByUsuario(@Param("usuarioParam") String usuario);
+	
+	@Query("SELECT u FROM Usuario u WHERE u.email = :emailParam")
+	Usuario findByEmail(@Param("emailParam") String email);
 }

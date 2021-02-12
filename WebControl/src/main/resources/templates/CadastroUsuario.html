@@ -7,7 +7,7 @@
 	<title>Cadastro Usuario</title>
 </head>
 <section layout:fragment="conteudo">
-	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+	<div th:class="${classe}" th:if="${!#strings.isEmpty(mensagem)}">
 		<span th:text="${mensagem}">Mensagem vem do Controller</span>
 	</div>
 	<form class="card" method="POST" action="/usuario">
@@ -42,7 +42,7 @@
 		  	</div>
 		  	<div class="form-group">
 				<button type="submit" class="btn btn-primary col-sm-1">Salvar</button>
-				<button type="submit" class="btn btn-secondary col-sm-1">Cancelar</button>
+				<button type="button" onClick="javascript:history.back()" class="btn btn-secondary col-sm-1">Cancelar</button>
 			</div>
 	  	</div>
 	</form>

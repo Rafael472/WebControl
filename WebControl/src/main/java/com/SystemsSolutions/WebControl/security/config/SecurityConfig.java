@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 			.antMatchers("/css/**", "/js/**", "/images/**").permitAll()	//autoriza pastas css, js, images e seus respectivos arquivos
-			.antMatchers("/", "/home").permitAll()	//autoriza pagina home
+			.antMatchers("/usuario/**").hasAuthority("ADMIN") //Autoriza qualquer ADMIN a entrar em paginas com /u/ na URI
 			.anyRequest().authenticated()
 			.and()
 				.formLogin()
@@ -32,8 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				.logout()
 				.logoutSuccessUrl("/login?logout")
-				.permitAll()
-			.and().httpBasic();
+			.and()
+				.exceptionHandling()
+				.accessDeniedPage("/acesso-negado");
+		http.csrf().disable();
+				
 	}
 
 	@Override
