@@ -1,5 +1,6 @@
 package com.SystemsSolutions.WebControl.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,8 +24,13 @@ public class UsuarioServices implements UserDetailsService{
 	@Autowired
 	private UsuarioRepository repository;
 	
+	//salva novo usuário
 	public void salvarUsuario(Usuario usuario) {
 		try {
+			Date data = new Date(System.currentTimeMillis());
+			usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+			usuario.setDataAlteracao(data);	//GET DATA
+			usuario.setHoraAlteracao(data); //GET HORA
 			repository.save(usuario);
 		} catch (DataIntegrityViolationException ex) {
 			throw new IllegalArgumentException(ex.getMessage());
@@ -31,15 +38,18 @@ public class UsuarioServices implements UserDetailsService{
 		
 	}
 	
+	//busca usuário por usuário no banco de dados
 	@Transactional(readOnly = true)
 	public Usuario buscarPorUsuario(String usuario) {
 		return repository.findByUsuario(usuario);
 	}
 	
+	//busca usuário por email no banco de dados
 	public Usuario buscarPorEmail(String email) {
 		return repository.findByEmail(email);
 	}
 	
+	//autenticação de usuário (spring-security)
 	@Override @Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String user) throws UsernameNotFoundException {
 		Usuario usuario = buscarPorUsuario(user);
@@ -57,7 +67,7 @@ public class UsuarioServices implements UserDetailsService{
 				AuthorityUtils.createAuthorityList(getAuthorities(usuario.getPerfis()))
 		);
 	}
-	
+	//converte lista de perfis para array string
 	private String[] getAuthorities(List<Perfil> perfis) {
 		String[] authorities = new String[perfis.size()];
 		
@@ -65,5 +75,10 @@ public class UsuarioServices implements UserDetailsService{
 			authorities[i] = perfis.get(i).getDesc();
 		}
 		return authorities;
+	}
+	
+	//checa se já existe usuário no banco de dados
+	public Boolean usuarioExiste(Usuario usuario) {
+		return (buscarPorUsuario(usuario.getUsuario()) != null);
 	}
 }
