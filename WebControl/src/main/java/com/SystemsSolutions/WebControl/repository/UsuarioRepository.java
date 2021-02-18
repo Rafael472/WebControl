@@ -1,9 +1,13 @@
 package com.SystemsSolutions.WebControl.repository;
 
+import java.util.Date;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.SystemsSolutions.WebControl.model.StatusUsuario;
 import com.SystemsSolutions.WebControl.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
@@ -14,4 +18,24 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	
 	@Query("SELECT u FROM Usuario u WHERE u.email = :emailParam")
 	Usuario findByEmail(@Param("emailParam") String email);
+	
+	@Modifying
+	@Query("UPDATE Usuario u "
+			+ "SET u.usuario 		= :usuarioParam"
+			+ ", u.senha 			= :senhaParam"
+			+ ", u.email 			= :emailParam"
+			+ ", u.dataAlteracao 	= :dataAltParam"
+			+ ", u.horaAlteracao 	= :horaAltParam"
+			+ ", u.dataCadastro 	= :dataCadParam"
+			+ ", u.status 			= :statusParam "
+			+ "WHERE u.id_usuario = :idParam")
+	Void EditByUsuario(@Param("usuarioParam") String usuario
+						, @Param("senhaParam") String senha
+						, @Param("emailParam") String email
+						, @Param("dataAltParam") Date dataAlteracao
+						, @Param("horaAltParam") Date horaAlteracao
+						, @Param("dataCadParam") Date dataCadastro
+						, @Param("statusParam") StatusUsuario status
+					, @Param("idParam")Long id);
+	
 }

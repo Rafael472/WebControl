@@ -42,7 +42,7 @@ public class Usuario {
 	@NotNull
 	private String senha;
 	
-	@Column(name = "EMAIL", unique = true, nullable = false)
+	@Column(name = "EMAIL", nullable = false)
 	private String email;
 	
 	@ManyToMany
@@ -134,5 +134,13 @@ public class Usuario {
 		this.dataCadastro = dataCadastro;
 	}
 	
-	
+	public boolean isAtivo(){
+		return StatusUsuario.ATIVO.equals(this.status);
+	}
+	public boolean isPendente(){
+		return StatusUsuario.PENDENTE.equals(this.status);
+	}
+	public boolean isBloqueado(){
+		return StatusUsuario.BLOQUEADO.equals(this.status);
+	}
 }

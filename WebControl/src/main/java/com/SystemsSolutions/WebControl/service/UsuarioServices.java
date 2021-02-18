@@ -2,6 +2,10 @@ package com.SystemsSolutions.WebControl.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -38,6 +42,31 @@ public class UsuarioServices implements UserDetailsService{
 		
 	}
 	
+	public Usuario buscaPorId(Long id) {
+		Optional<Usuario> lista = repository.findById(id);
+		if(!lista.isEmpty())
+			return lista.get();
+		return null;
+	}
+	
+	@Transactional()
+	public void editarPorUsuario(Usuario usuario, Long id) {
+		Date data = new Date(System.currentTimeMillis());
+		usuario.setId_Usuario(id);
+		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+		usuario.setDataAlteracao(data); //GET DATA
+		usuario.setHoraAlteracao(data); //GET HORA
+		repository.EditByUsuario(
+				usuario.getUsuario()
+				, usuario.getSenha()
+				, usuario.getEmail()
+				, usuario.getDataAlteracao()
+				, usuario.getHoraAlteracao()
+				, usuario.getDataCadastro()
+				, usuario.getStatus()
+				, id);
+	}
+	
 	//busca usuário por usuário no banco de dados
 	@Transactional(readOnly = true)
 	public Usuario buscarPorUsuario(String usuario) {
@@ -47,6 +76,15 @@ public class UsuarioServices implements UserDetailsService{
 	//busca usuário por email no banco de dados
 	public Usuario buscarPorEmail(String email) {
 		return repository.findByEmail(email);
+	}
+	
+	//busca todos os usuários
+	public List<Usuario> buscarTodos(){
+		return repository.findAll();
+	}
+	
+	public void deletar(Long id) {
+		repository.deleteById(id);
 	}
 	
 	//autenticação de usuário (spring-security)
