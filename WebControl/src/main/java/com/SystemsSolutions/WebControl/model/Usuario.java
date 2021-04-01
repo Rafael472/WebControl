@@ -51,12 +51,9 @@ public class Usuario {
 				//referencia usuario_id da tabela usuarios_tem_perfis na id_usuario da tabela usuario
 		joinColumns = { @JoinColumn(name = "usuario_id", referencedColumnName = "id_usuario") },
         inverseJoinColumns = { @JoinColumn(name = "perfil_id", referencedColumnName = "id") }
-	) //criar a tabela usuarios_tem_perfis
+	)
 	private List<Perfil> perfis;
-	
-	//@Column(name = "ativo", nullable = false, columnDefinition = "TINYINT(1)")
-	//private boolean ativo;
-	
+		
 	@Column(name = "DATA_CADASTRO", unique = false, nullable = false)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)

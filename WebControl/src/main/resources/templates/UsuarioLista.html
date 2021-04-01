@@ -11,9 +11,14 @@
 		<span th:text="${mensagem}">Mensagem vem do Controller</span>
 	</div>
 	<form class="card" method="POST" action="">
-		<h5 class="card-header">Cadastro de Usuário</h5>
+		<div class="card-header">
+			<h5>Cadastro de Usuário</h5>
+		</div>
 		<div class="card-body">
-			<table class="table">
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" formaction="/usuario/novo">Adicionar</button>
+		</div>
+			<table id="table" class="table">
 				<thead>
 					<tr>
 						<th scope="row">Usuario</th>
@@ -33,18 +38,16 @@
 								th:classappend="${usuario.ativo ? 'bg-success text-white' : usuario.pendente ? 'bg-warning text-dark' : 'bg-danger text-white'}"></span>
 						</td>
 						<td class="text-center">
-							<a class="btn btn-link" title="Editar" th:href="@{/usuario/{codigo}(codigo=${usuario.getId_Usuario()})}">
+							<a class="btn btn-link" title="Editar" th:href="@{/usuario/{codigo}(codigo=${usuario.getId_Usuario()})}" rel="tooltip" data-placement="top">
 								<span class="bi bi-pencil"></span>
 							</a>
 							<a type="button" class="btn btn-link text-danger" title="Excluir" data-toggle="modal" data-target="#exclusaoModal"
-								th:attr="data-codigo=${usuario.getId_Usuario()}, data-usuario=${usuario.usuario}">
+								th:attr="data-codigo=${usuario.getId_Usuario()}, data-usuario=${usuario.usuario}" rel="tooltip" data-placement="top">
 								<span class="bi bi-trash"></span>
 							</a>
 						</td>
 					</tr>
-					<tr>
-						<td colspan="5" th:if="${#lists.isEmpty(todosUsuarios)}">Nenhum usuário encontrado!</td>
-					</tr>
+					
 				</tbody>
 			</table>
 	  	</div>

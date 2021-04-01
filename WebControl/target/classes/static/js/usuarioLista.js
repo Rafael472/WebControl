@@ -14,3 +14,11 @@ $('#exclusaoModal').on('show.bs.modal', function(event) {
 	
 	modal.find('.modal-body').html('Tem certeza que deseja excluir o usuário <strong>' + descricaoUsuario + '</strong>?');
 });
+
+$(function() {
+	$('[rel="tooltip"]').tooltip();
+});
+
+$(document).ready(function() {
+    $('#table').DataTable();
+} );

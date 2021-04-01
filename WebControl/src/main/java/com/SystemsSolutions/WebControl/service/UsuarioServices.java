@@ -4,9 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -53,18 +50,13 @@ public class UsuarioServices implements UserDetailsService{
 	public void editarPorUsuario(Usuario usuario, Long id) {
 		Date data = new Date(System.currentTimeMillis());
 		usuario.setId_Usuario(id);
-		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
 		usuario.setDataAlteracao(data); //GET DATA
 		usuario.setHoraAlteracao(data); //GET HORA
-		repository.EditByUsuario(
-				usuario.getUsuario()
-				, usuario.getSenha()
-				, usuario.getEmail()
-				, usuario.getDataAlteracao()
-				, usuario.getHoraAlteracao()
-				, usuario.getDataCadastro()
-				, usuario.getStatus()
-				, id);
+		if(!usuario.getSenha().equals("")) { //Se senha não for vazia, salva usuario com a nova senha
+			usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+			repository.EditByUsuario(usuario.getUsuario(), usuario.getSenha(), usuario.getEmail(), usuario.getDataAlteracao(), usuario.getHoraAlteracao(), usuario.getStatus(), id);
+		}else //senão, salva usuário sem alterar a senha
+			repository.EditByUsuario(usuario.getUsuario(), usuario.getEmail(), usuario.getDataAlteracao(), usuario.getHoraAlteracao(), usuario.getStatus(), id);
 	}
 	
 	//busca usuário por usuário no banco de dados

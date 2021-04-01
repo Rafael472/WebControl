@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.SystemsSolutions.WebControl.model.StatusUsuario;
 import com.SystemsSolutions.WebControl.model.Usuario;
+import com.SystemsSolutions.WebControl.repository.UsuarioRepository;
 import com.SystemsSolutions.WebControl.service.UsuarioServices;
 
 @Controller
@@ -29,6 +30,7 @@ public class UsuarioController {
 	private static final String REDIRECT_USUARIO_ACAO = "redirect:/usuario/novo";
 	
 	@Autowired UsuarioServices usuarioServices;
+	@Autowired UsuarioRepository usuarioRepository;
 	
 	@RequestMapping({"","/"})
 	public ModelAndView usuario() {
@@ -46,7 +48,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "/salvarUsuario", method = RequestMethod.POST)
-	public String salvar(@ModelAttribute("form") @Validated Usuario usuario, Errors erros, RedirectAttributes attributes) {
+	public String salvar(@Validated @ModelAttribute("form") Usuario usuario, Errors erros, RedirectAttributes attributes) {
 		
 		if(erros.hasErrors()) {
 			Usuario form = new Usuario();
@@ -86,10 +88,10 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "editar/{codigo}", method = RequestMethod.PUT)
-	public ModelAndView editarUsuario(@ModelAttribute("form") @Validated Usuario usuario, @PathVariable Long codigo) {
-		ModelAndView mv = new ModelAndView(USUARIO_LISTA);
+	public String editarUsuario(@ModelAttribute("form") @Validated Usuario usuario, @PathVariable Long codigo) {
+		System.out.println("----------  Senha: " + usuario.getSenha());
 		usuarioServices.editarPorUsuario(usuario, codigo);
-		return mv;
+		return REDIRECT_USUARIO_LISTA;
 	}
 	
 	@RequestMapping(value="excluir/{codigo}", method = RequestMethod.DELETE)
@@ -103,4 +105,10 @@ public class UsuarioController {
 		return Arrays.asList(StatusUsuario.values());
 	}
 	
+	/*
+		@PutMapping("editar/{codigo}")
+		public ResponseEntity<Usuario> Put(@RequestBody Usuario user){
+			return ResponseEntity.status(HttpStatus.OK).body(usuarioRepository.save(user));
+		}
+	*/
 }
