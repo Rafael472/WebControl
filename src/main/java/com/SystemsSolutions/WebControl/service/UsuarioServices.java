@@ -41,7 +41,7 @@ public class UsuarioServices implements UserDetailsService{
 	
 	public Usuario buscaPorId(Long id) {
 		Optional<Usuario> lista = repository.findById(id);
-		if(!lista.isEmpty())
+		if(lista.isPresent())
 			return lista.get();
 		return null;
 	}
