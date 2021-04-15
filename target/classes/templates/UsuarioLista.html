@@ -59,7 +59,7 @@
 		<!-- Modal -->
 		<div class="modal fade" id="exclusaoModal" tabindex="-1" onLoad="jsAbreModal();" aria-labelledby="exclusaoModalLabel" aria-hidden="true">
 	  		<div class="modal-dialog">
-	  			<form action="/usuario/excluir" method="POST" th:method="DELETE">
+	  			<form th:attr="data-url='/usuario/excluir'" method="POST" th:method="DELETE">
 			    	<div class="modal-content">
 			      		<div class="modal-header">
 			        		<h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
