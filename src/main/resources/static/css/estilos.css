@@ -21,3 +21,12 @@ body {
 	margin-left: 2px;
 	margin-right: 2px;
 }
+
+.bibi-key {
+	transform: rotateZ(90deg);
+}
+
+.bolder {
+	font-weight: bolder;
+	font-size: large;	
+}

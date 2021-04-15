@@ -15,9 +15,9 @@
 			<h5>Cadastro de Usuário</h5>
 		</div>
 		<div class="card-body">
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" formaction="/usuario/novo">Adicionar</button>
-		</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" formaction="/usuario/novo">Adicionar</button>
+			</div>
 			<table id="table" class="table">
 				<thead>
 					<tr>
@@ -40,6 +40,9 @@
 						<td class="text-center">
 							<a class="btn btn-link" title="Editar" th:href="@{/usuario/{codigo}(codigo=${usuario.getId_Usuario()})}" rel="tooltip" data-placement="top">
 								<span class="bi bi-pencil"></span>
+							</a>
+							<a class="btn btn-link bibi-key" title="Permissões" th:href="@{/perfis/{codigo}(codigo=${usuario.getId_Usuario()})}" rel="tooltip" data-placement="top">
+								<span class="bi bi-key"></span>
 							</a>
 							<a type="button" class="btn btn-link text-danger" title="Excluir" data-toggle="modal" data-target="#exclusaoModal"
 								th:attr="data-codigo=${usuario.getId_Usuario()}, data-usuario=${usuario.usuario}" rel="tooltip" data-placement="top">

@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.SystemsSolutions.WebControl.model.Perfil;
 import com.SystemsSolutions.WebControl.model.Usuario;
+import com.SystemsSolutions.WebControl.repository.PerfilRepository;
 import com.SystemsSolutions.WebControl.repository.UsuarioRepository;
 
 @Service
@@ -24,6 +25,8 @@ public class UsuarioServices implements UserDetailsService{
 	
 	@Autowired
 	private UsuarioRepository repository;
+	@Autowired
+	private PerfilRepository perfilRepository;
 	
 	//salva novo usuário
 	public void salvarUsuario(Usuario usuario) {
@@ -110,5 +113,13 @@ public class UsuarioServices implements UserDetailsService{
 	//checa se já existe usuário no banco de dados
 	public Boolean usuarioExiste(Usuario usuario) {
 		return (buscarPorUsuario(usuario.getUsuario()) != null);
+	}
+
+	public void inserirRelacao(Long idUsuario, Long idPerfil) {
+		perfilRepository.inserir(idUsuario, idPerfil);
+	}
+
+	public void deletarRelacao(Long idUsuario, Long idPerfil) {
+		perfilRepository.deletar(idUsuario, idPerfil);
 	}
 }

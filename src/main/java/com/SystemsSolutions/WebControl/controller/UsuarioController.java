@@ -89,7 +89,6 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "editar/{codigo}", method = RequestMethod.PUT)
 	public String editarUsuario(@ModelAttribute("form") @Validated Usuario usuario, @PathVariable Long codigo) {
-		System.out.println("----------  Senha: " + usuario.getSenha());
 		usuarioServices.editarPorUsuario(usuario, codigo);
 		return REDIRECT_USUARIO_LISTA;
 	}
@@ -104,11 +103,4 @@ public class UsuarioController {
 	public List<StatusUsuario> todosStatusUsuario() {
 		return Arrays.asList(StatusUsuario.values());
 	}
-	
-	/*
-		@PutMapping("editar/{codigo}")
-		public ResponseEntity<Usuario> Put(@RequestBody Usuario user){
-			return ResponseEntity.status(HttpStatus.OK).body(usuarioRepository.save(user));
-		}
-	*/
 }
