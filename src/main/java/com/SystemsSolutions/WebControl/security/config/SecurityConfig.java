@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 			.antMatchers("/css/**", "/js/**", "/images/**").permitAll()	//autoriza pastas css, js, images e seus respectivos arquivos
-			.antMatchers("/usuario/**").hasAuthority("ADMIN") //Autoriza qualquer ADMIN a entrar em paginas com /u/ na URI
+			.antMatchers("/usuario/**", "/perfis/**").hasAuthority("ADMIN") //Autoriza qualquer ADMIN a entrar em paginas com /usuario/ na URI
 			.anyRequest().authenticated()
 			.and()
 				.formLogin()
