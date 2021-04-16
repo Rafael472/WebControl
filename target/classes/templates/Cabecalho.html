@@ -10,22 +10,34 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto float-left">
 		<!-- MENU -->
-	      <li class="nav-item dropdown" sec:authorize="hasAuthority('ADMIN')">
-	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          Administrador
-	        </a>
-	        <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdown">
-        		<li class="nav-link dropdown">
-					<a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Usuario</a>
-		          	<ul class="dropdown-menu">
-		          		<li class="nav-link dropdown">
-			          		<a class="dropdown-item" href="/usuario">Cadastro</a>
-			          	</li>
-		          	</ul>
-				</li>
-				<!-- ADICIONAR <li> ABAIXO (ANTES DO </ul>) PARA MAIS LINHAS NO MENU -->
-	        </ul>
-	        <!-- FIM MENU -->
+			<li class="nav-item dropdown" sec:authorize="hasAuthority('ADMIN')">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Administrador
+		        </a>
+		        <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdown">
+	        		<li class="nav-link dropdown">
+						<a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Usuario</a>
+			          	<ul class="dropdown-menu">
+			          		<li class="nav-link dropdown">
+				          		<a class="dropdown-item" href="/usuario">Cadastro</a>
+				          	</li>
+			          	</ul>
+					</li>
+					<!-- ADICIONAR <li> ABAIXO (ANTES DO </ul>) PARA MAIS LINHAS NO MENU -->
+		        </ul>
+	        </li>
+	        <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ADMIN','PRODUTO')">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Produto
+		        </a>
+		        <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdown">
+	        		<li class="nav-link dropdown">
+						<a class="dropdown-item" href="/produto">Cadastro</a>
+					</li>
+					<!-- ADICIONAR <li> ABAIXO (ANTES DO </ul>) PARA MAIS LINHAS NO MENU -->
+		        </ul>
+	        </li>
+        <!-- FIM MENU -->
 	    </ul>
     </div>
 	<div class="text-white form-inline">
