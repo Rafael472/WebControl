@@ -22,7 +22,7 @@
 				<thead>
 					<tr>
 						<th scope="row">Código</th>
-						<th class="text-left" scope="col">Descrição</th>
+						<th class="text-left" scope="col">Nome</th>
 						<th class="text-left" scope="col">Unid. Medida</th>
 						<th class="text-right" scope="col">Valor</th>
 						<th class="text-center" scope="col">Data Cadastro</th>
@@ -33,7 +33,7 @@
 				<tbody>
 					<tr th:each="produto : ${todosProdutos}">
 						<td class="align-middle" th:text="${produto.codigo}"/>
-						<td class="align-middle" th:text="${produto.descricao}"/>
+						<td class="align-middle" th:text="${produto.nome}"/>
 						<td class="align-middle" th:text="${{produto.unidadeMedida}}"/>
 						<td class="align-middle text-right" th:text="|R$ ${{produto.valor}}|"/>
 						<td class="align-middle text-center " th:text="${{produto.dataCadastro}}"/>

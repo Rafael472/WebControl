@@ -42,7 +42,6 @@ public class UsuarioController {
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
 		ModelAndView mv = new ModelAndView(USUARIO_ACAO);
-		mv.addObject("todosStatusUsuario", StatusUsuario.values());
 		mv.addObject(new Usuario());
 		return mv;
 	}

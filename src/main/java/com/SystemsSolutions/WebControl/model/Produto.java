@@ -35,17 +35,21 @@ public class Produto {
 	@Column(name = "CODIGO", unique = true, nullable = false)
 	private String codigo;
 	
-	@NotBlank(message = "Descrição é obrigatória")
-	@Size(max = 255, message = "A descrição não pode conter mais de 255 caracteres")
+	@NotBlank(message = "Nome é obrigatório")
+	@Size(max = 255, message = "Nome não pode conter mais de 255 caracteres")
+	@Column(name="NOME", unique = false, nullable = false)
+	private String nome;
+	
 	@Column(name = "DESCRICAO", unique = false, nullable = false)
 	private String descricao;
 	
-	@Size(max = 6, message = "A unidade de medida não pode conter mais de 6 caracteres")
+	@Size(max = 6, message = "unidade de medida não pode conter mais de 6 caracteres")
 	@Column(name = "UN_MEDIDA", unique = false, nullable = false)
 	private String unidadeMedida;
 	
 	@DecimalMin(value = "0.0001", message = "Quantidade não pode ser menor que R$0,0001")
 	@DecimalMax(value = "99999999.9999", message = "Quantidade não pode ser maior que R$99.999.999,9999")
+	@NumberFormat(pattern = "#,##0.00")
 	@Column(name = "QUANTIDADE", unique = false, nullable = false)
 	private double quantidade;
 	
@@ -91,6 +95,18 @@ public class Produto {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setUnidadeMedida(String unidadeMedida) {
+		this.unidadeMedida = unidadeMedida;
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -102,10 +118,6 @@ public class Produto {
 
 	public String getUnidadeMedida() {
 		return unidadeMedida;
-	}
-
-	public void setUnidade_medida(String unidadeMedida) {
-		this.unidadeMedida = unidadeMedida;
 	}
 
 	public double getQuantidade() {
