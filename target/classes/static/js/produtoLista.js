@@ -3,8 +3,8 @@ $(function() {
 	$('#exclusaoModal').on('show.bs.modal', function(event) {
 		var button = $(event.relatedTarget);
 		
-		var codigoUsuario = button.data('codigo');
-		var descricaoUsuario = button.data('usuario');
+		var codigoProduto = button.data('codigo');
+		var descricaoProduto = button.data('produto');
 		
 		var modal = $(this);
 		var form = modal.find('form');
@@ -12,9 +12,9 @@ $(function() {
 		if (!action.endsWith('/')) {
 			action += '/';
 		}
-		form.attr('action', action + codigoUsuario);
+		form.attr('action', action + codigoProduto);
 		
-		modal.find('.modal-body').html('Tem certeza que deseja excluir o usuário <strong>' + descricaoUsuario + '</strong>?');
+		modal.find('.modal-body').html('Tem certeza que deseja excluir o produto <strong>' + descricaoProduto + '</strong>?');
 	});
 	
 	$(function() {

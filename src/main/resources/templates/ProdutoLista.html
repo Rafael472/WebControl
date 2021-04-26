@@ -57,28 +57,30 @@
 	  	</div>
 	</form>
 	
-		<!-- Modal -->
-		<div class="modal fade" id="exclusaoModal" tabindex="-1" onLoad="jsAbreModal();" aria-labelledby="exclusaoModalLabel" aria-hidden="true">
-	  		<div class="modal-dialog">
-	  			<form th:attr="data-url='/produto/excluir'" method="POST" th:method="DELETE">
-			    	<div class="modal-content">
-			      		<div class="modal-header">
-			        		<h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
-			        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          			<span aria-hidden="true">&times;</span>
-		        			</button>
-			      		</div>
-						<div class="modal-body">
-							Deseja excluir o produto ... ?
-						</div>
-		      			<div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-					        <button type="submit" class="btn btn-danger">Excluir</button>
-			      		</div>
-			    	</div>
-			    </form>
-		  	</div>
-		</div>
-		<!-- FIM MODAL -->
+	<!-- Modal -->
+	<div class="modal fade" id="exclusaoModal" tabindex="-1" onLoad="jsAbreModal();" aria-labelledby="exclusaoModalLabel" aria-hidden="true">
+  		<div class="modal-dialog">
+  			<form th:attr="data-url='/produto/excluir'" method="POST" th:method="DELETE">
+		    	<div class="modal-content">
+		      		<div class="modal-header">
+		        		<h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
+		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          			<span aria-hidden="true">&times;</span>
+	        			</button>
+		      		</div>
+					<div class="modal-body">
+						Deseja excluir o produto ... ?
+					</div>
+	      			<div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+				        <button type="submit" class="btn btn-danger">Excluir</button>
+		      		</div>
+		    	</div>
+		    </form>
+	  	</div>
+	</div>
+	<!-- FIM MODAL -->
+	<script src="/js/jquery-3.5.1.js"></script>
+	<script src="/js/produtoLista.js"></script>
 </section>
 </html>

@@ -19,7 +19,7 @@ import com.SystemsSolutions.WebControl.service.UsuarioServices;
 @RequestMapping("/perfis")
 public class PerfilController {
 
-private static final String PERMISSOES_ACAO = "PerfisAcao";
+private static final String USUARIO_PERMISSOES_ACAO = "UsuarioPerfilAcao";
 	
 	@Autowired UsuarioServices usuarioServices;
 	@Autowired UsuarioRepository usuarioRepository;
@@ -27,13 +27,14 @@ private static final String PERMISSOES_ACAO = "PerfisAcao";
 	
 	@RequestMapping(value = "/{idUsuario}")
 	public ModelAndView permissoes(@PathVariable Long idUsuario) {
-		ModelAndView mv = new ModelAndView(PERMISSOES_ACAO);
+		ModelAndView mv = new ModelAndView(USUARIO_PERMISSOES_ACAO);
 		Optional<Usuario> usuario = usuarioRepository.findById(idUsuario);
 		
 		if(usuario.isPresent()) {
 			mv.addObject("perfis", perfilRepository.findAll());
 			mv.addObject("perfisUsuario", usuario.get().getPerfis());
 			mv.addObject("usuarioId", usuario.get().getId_Usuario());
+			mv.addObject("usuario", usuario.get().getUsuario());
 		}
 		return mv;
 	}

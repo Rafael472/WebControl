@@ -4,33 +4,33 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 		layout:decorate="~{LayoutPadrao}">
 <head>
-	<title>Cadastro Usuario</title>
+	<title>Cadastro Usuarios</title>
 </head>
 <section layout:fragment="conteudo">
 	<div th:class="${classe}" th:if="${!#strings.isEmpty(mensagem)}">
 		<span th:text="${mensagem}">Mensagem vem do Controller</span>
 	</div>
 	<form class="card" th:method="${action} == editar ? 'PUT' : 'POST'" th:action="${action} == 'editar' ? @{/usuario/editar/{codigo}(codigo=${usuario.getId_Usuario()})} : @{/usuario/salvarUsuario}" th:object="${usuario}">
-		<h5 class="card-header">Cadastro de Usuário</h5>
+		<h5 class="card-header">Cadastro de Usuários</h5>
 		<div class="card-body">
 			<input type="hidden" name="id_usuario" th:value="${usuario.getId_Usuario()}"/>
 			<div class="form-group">
 			    <label for="txtUsuario">Usuário</label>
-			    <input type="text" required class="form-control col-md-6" id="txtUsuario" name="usuario" th:field="*{usuario}" placeholder="Usuario"/>
+			    <input type="text" required class="form-control form-control-sm col-md-6" id="txtUsuario" name="usuario" th:field="*{usuario}" placeholder="Usuario"/>
 		  	</div>
 		  	<div class="form-group">
 			    <label for="txtSenha">Senha</label>
-			    <input type="password" class="form-control col-md-6" id="txtSenha" name="senha"
+			    <input type="password" class="form-control form-control-sm col-md-6" id="txtSenha" name="senha"
 			    th:required="${action} == editar ? null : 'required'" th:field="*{senha}" th:placeholder="${action} == 'editar' ? 'Se vazio, Senha permanece a mesma.' : 'Senha'"/>
 		  	</div>
 		  	<div class="form-group">
 			    <label for="txtEmail">E-mail</label>
-			    <input type="email" required class="form-control col-md-6" id="txtEmail" name="email" th:field="*{email}" placeholder="nome@exemplo.com"/>
+			    <input type="email" required class="form-control form-control-sm col-md-6" id="txtEmail" name="email" th:field="*{email}" placeholder="nome@exemplo.com"/>
 		  	</div>
 		  	<div class="form-group" th:if="${action} != editar">
 				<label for="dataCadastro" class="">Data de Cadastro</label>
 				<div>
-					<input type="text" required class="form-control col-sm-2"	id="dataCadastro" name="dataCadastro"
+					<input type="text" required class="form-control form-control-sm col-sm-2"	id="dataCadastro" name="dataCadastro"
 						data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
 						data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="auto"
 						placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" />
@@ -38,15 +38,20 @@
 			</div>
 		  	<div class="form-group">
 		    	<label for="ddlSituacao">Situação</label>
-		    	<select class="form-control col-sm-2" id="ddlSituacao" name="status">
+		    	<select class="form-control form-control-sm col-sm-2" id="ddlSituacao" name="status">
 		      		<option th:each="status : ${todosStatusUsuario}" th:value="${status}" th:text="${status.descricao}"></option>
 		    	</select>
 		  	</div>
 		  	<div class="form-group">
 				<button type="submit" class="btn btn-primary col-sm-1">Salvar</button>
-				<button type="button" onClick="javascript:history.back()" class="btn btn-secondary col-sm-1">Cancelar</button>
+				<button id="btnCancelar" type="button" class="btn btn-secondary col-sm-1">Cancelar</button>
 			</div>
 	  	</div>
 	</form>
+	<script type="text/javascript">
+	    document.getElementById("btnCancelar").onclick = function () {
+	    	window.location.pathname = "/usuario";
+	    };
+	</script>
 </section>
 </html>
