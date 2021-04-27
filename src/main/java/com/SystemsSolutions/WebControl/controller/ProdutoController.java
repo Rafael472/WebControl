@@ -5,11 +5,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.SystemsSolutions.WebControl.model.Produto;
 import com.SystemsSolutions.WebControl.model.StatusProduto;
 import com.SystemsSolutions.WebControl.model.UnidadeMedida;
-import com.SystemsSolutions.WebControl.model.Usuario;
 import com.SystemsSolutions.WebControl.repository.ProdutoRepository;
 import com.SystemsSolutions.WebControl.repository.UnidadeMedidaRepository;
 import com.SystemsSolutions.WebControl.service.ProdutoServices;
@@ -32,6 +29,7 @@ public class ProdutoController {
 	private static final String PRODUTO_LISTA = "ProdutoLista";
 	private static final String PRODUTO_ACAO = "ProdutoAcao";
 	private static final String REDIRECT_PRODUTO_LISTA = "redirect:/produto";
+	private static final String REDIRECT_PRODUTO_NOVO = "redirect:/produto/novo";
 	
 	@Autowired ProdutoRepository produtoRepository;
 	@Autowired UnidadeMedidaRepository unidadeMedidaRepository;
@@ -52,15 +50,29 @@ public class ProdutoController {
 	}
 	
 	@RequestMapping("/salvarProduto")
-	public String salvar(@Valid Produto produto, Errors erros, RedirectAttributes attributes) {
-		
+	public ModelAndView salvar(@Valid Produto produto, Errors erros, RedirectAttributes attributes) {
+		ModelAndView mv = new ModelAndView(PRODUTO_ACAO);
 		if(erros.hasErrors()) {
-			Produto form = new Produto();
-			BeanUtils.copyProperties(form, produto);
-			return PRODUTO_ACAO;
+			return mv;
 		}
-		produtoServices.salvar(produto);
-		return PRODUTO_ACAO;
+		
+		if(produtoServices.produtoExiste(produto)) {
+			mv.addObject("classe", "alert alert-warning");
+			mv.addObject("mensagem", "Código "+ produto.getCodigo() +" já existe!");
+			return mv;
+		}
+		
+		try {
+			produtoServices.salvar(produto);
+			attributes.addFlashAttribute("classe", "alert alert-success");
+			attributes.addFlashAttribute("mensagem", "Produto salvo com sucesso!");
+		}catch (Exception ex) {
+			attributes.addFlashAttribute("classe", "alert alert-danger");
+			attributes.addFlashAttribute("mensagem", ex.getMessage());
+		}
+		
+		mv.setViewName(REDIRECT_PRODUTO_NOVO);
+		return mv;
 	}
 	
 	@RequestMapping(value="excluir/{codigo}", method = RequestMethod.DELETE)

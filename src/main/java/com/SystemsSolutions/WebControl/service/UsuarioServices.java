@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -86,9 +87,6 @@ public class UsuarioServices implements UserDetailsService{
 	@Override @Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String user) throws UsernameNotFoundException {
 		Usuario usuario = buscarPorUsuario(user);
-		System.out.println("Usuário encontrado: " + usuario.getUsuario()
-						+  "\nSenha: " + usuario.getSenha()
-						+  "\nStatus: " + usuario.getStatus());
 		
 		if(usuario.getStatus().toString().equals("BLOQUEADO") || usuario.getStatus().toString().equals("PENDENTE")) {
 			usuario = null;
@@ -108,6 +106,19 @@ public class UsuarioServices implements UserDetailsService{
 			authorities[i] = perfis.get(i).getDesc();
 		}
 		return authorities;
+	}
+	
+	public String getUsuarioAutenticado() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		String usuario;
+
+		if (principal instanceof UserDetails) {
+			usuario = ((UserDetails)principal).getUsername();
+		} else {
+			usuario = principal.toString();
+		}
+		return usuario;
 	}
 	
 	//checa se já existe usuário no banco de dados

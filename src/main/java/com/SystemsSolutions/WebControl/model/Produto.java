@@ -39,22 +39,25 @@ public class Produto {
 	@Size(max = 255, message = "Nome não pode conter mais de 255 caracteres")
 	@Column(name="NOME", unique = false, nullable = false)
 	private String nome;
-	
+
+	@Size(max = 255, message = "Descrição não pode conter mais de 255 caracteres")
 	@Column(name = "DESCRICAO", unique = false, nullable = false)
 	private String descricao;
 	
+	@NotBlank(message = "Unidade de Medida é obrigatória")
 	@Size(max = 6, message = "unidade de medida não pode conter mais de 6 caracteres")
 	@Column(name = "UN_MEDIDA", unique = false, nullable = false)
 	private String unidadeMedida;
 	
-	@DecimalMin(value = "0.0001", message = "Quantidade não pode ser menor que R$0,0001")
-	@DecimalMax(value = "99999999.9999", message = "Quantidade não pode ser maior que R$99.999.999,9999")
+	@NotNull(message = "Quantidade é obrigatória")
+	@DecimalMin(value = "0.0001", message = "Quantidade não pode ser menor que 0,0001")
+	@DecimalMax(value = "99999999.9999", message = "Quantidade não pode ser maior que 99.999.999,9999")
 	@NumberFormat(pattern = "#,##0.00")
 	@Column(name = "QUANTIDADE", unique = false, nullable = false)
 	private double quantidade;
 	
 	@NotNull(message = "Valor é obrigatório")
-	@DecimalMin(value = "0.0001", message = "Valor não pode ser menor que R$0,0001")
+	@DecimalMin(value = "0.01", message = "Valor não pode ser menor que R$0,01")
 	@DecimalMax(value = "99999999.9999", message = "Valor não pode ser maior que R$99.999.999,9999")
 	@NumberFormat(pattern = "#,##0.00")
 	@Column(name = "VALOR", unique = false, nullable = false)
@@ -77,6 +80,11 @@ public class Produto {
 	@Column(name = "DATA_ALTERACAO", unique = false, nullable = false)
 	private Date dataAlteracao;
 
+	@DateTimeFormat(pattern = "HH:mm:ss")
+	@Temporal(TemporalType.TIME)
+	@Column(name = "HORA_ALTERACAO", unique = false, nullable = false)
+	private Date horaAlteracao;
+	
 	@Column(name = "USUARIO_ALTERACAO", unique = false, nullable = false)
 	private String usuarioAlteracao;
 
@@ -174,6 +182,14 @@ public class Produto {
 
 	public void setStatus(StatusProduto status) {
 		this.status = status;
+	}
+
+	public Date getHoraAlteracao() {
+		return horaAlteracao;
+	}
+	
+	public void setHoraAlteracao(Date horaAlteracao) {
+		this.horaAlteracao = horaAlteracao;
 	}
 	
 	public boolean isAtivo(){
