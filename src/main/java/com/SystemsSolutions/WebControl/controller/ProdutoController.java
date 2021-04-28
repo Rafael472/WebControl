@@ -49,7 +49,7 @@ public class ProdutoController {
 		return mv;
 	}
 	
-	@RequestMapping("/salvarProduto")
+	@RequestMapping(value = "/salvarProduto", method = RequestMethod.POST)
 	public ModelAndView salvar(@Valid Produto produto, Errors erros, RedirectAttributes attributes) {
 		ModelAndView mv = new ModelAndView(PRODUTO_ACAO);
 		if(erros.hasErrors()) {

@@ -3,7 +3,6 @@ package com.SystemsSolutions.WebControl.controller;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -47,23 +46,16 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "/salvarUsuario", method = RequestMethod.POST)
-	public String salvar(@Validated @ModelAttribute("form") Usuario usuario, Errors erros, RedirectAttributes attributes) {
-		
+	public ModelAndView salvar(@ModelAttribute("form") @Validated Usuario usuario, Errors erros, RedirectAttributes attributes) {
+		ModelAndView mv = new ModelAndView(USUARIO_ACAO);
 		if(erros.hasErrors()) {
-			Usuario form = new Usuario();
-			BeanUtils.copyProperties(form, usuario);
-			return USUARIO_ACAO;
+			return mv;
 		}
 		
-		if(usuario.getId_Usuario() != null) {
-			if(usuarioServices.usuarioExiste(usuario)) {
-				attributes.addFlashAttribute("classe", "alert alert-warning");
-				attributes.addFlashAttribute("mensagem", "Usuário já existe!");
-				attributes.addFlashAttribute("usuario", usuario.getUsuario());
-				attributes.addFlashAttribute("senha", usuario.getSenha());
-				attributes.addFlashAttribute("email", usuario.getEmail());
-				return REDIRECT_USUARIO_ACAO;
-			}
+		if(usuarioServices.usuarioExiste(usuario)) {
+			mv.addObject("classe", "alert alert-warning");
+			mv.addObject("mensagem", "Usuário "+ usuario.getUsuario() +" já existe!");
+			return mv;
 		}
 		
 		try {
@@ -74,7 +66,8 @@ public class UsuarioController {
 			attributes.addFlashAttribute("classe", "alert alert-danger");
 			attributes.addFlashAttribute("mensagem", ex.getMessage());
 		}
-		return REDIRECT_USUARIO_ACAO;
+		mv.setViewName(REDIRECT_USUARIO_ACAO);
+		return mv;
 	}
 	
 	@RequestMapping(value = "{codigo}")

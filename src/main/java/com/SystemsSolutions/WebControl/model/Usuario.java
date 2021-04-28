@@ -81,7 +81,14 @@ public class Usuario {
 	public void setHoraAlteracao(Date horaAlteracao) {
 		this.horaAlteracao = horaAlteracao;
 	}
-	
+	public Long getId_usuario() {
+		return id_usuario;
+	}
+	public void setId_usuario(Long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "STATUS", nullable = false)
 	private StatusUsuario status;
