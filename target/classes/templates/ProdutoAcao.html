@@ -12,6 +12,7 @@
 		<div th:replace="MensagemGeral"></div>
     	<div th:replace="MensagemErro"></div>
 		<div class="card-body">
+			<input type="hidden" th:field="*{id_produto}"/>
 			<div class="row">
 				<div class="col form-group col-sm-3">
 				    <label for="txtCodigo">Código</label>
@@ -31,13 +32,15 @@
 		  		</div>
 		  		<div class="col form-group col-sm-3">
 					<label for="txtQuantidade" class="">Quantidade</label>
-					<input type="number" class="form-control form-control-sm" th:classappend="${#fields.hasErrors('quantidade')} ? is-invalid" id="txtQuantidade" placeholder="Quantidade em Estoque" th:field="*{quantidade}"/>
+					<input type="text" class="form-control form-control-sm" th:classappend="${#fields.hasErrors('quantidade')} ? is-invalid" id="txtQuantidade" placeholder="Quantidade em Estoque" th:field="*{quantidade}"/>
+					<div class="invalid-feedback">Quantidade deve conter apenas números.</div>
 				</div>
 		  	</div>
 		  	<div class="row">
 				<div class="col form-group col-sm-3">
 					<label for="txtValor" class="">Valor</label>
-					<input type="number" class="form-control form-control-sm" th:classappend="${#fields.hasErrors('valor')} ? is-invalid" id="txtValor" name="valor" placeholder="Valor do Produto" th:field="*{valor}"/>
+					<input type="text" class="form-control form-control-sm" th:classappend="${#fields.hasErrors('valor')} ? is-invalid" id="txtValor" name="valor" placeholder="Valor do Produto" th:field="*{valor}"/>
+					<div class="invalid-feedback">Valor deve conter apenas números.</div>
 				</div>
 			</div>
 			<div class="row">
@@ -65,5 +68,7 @@
 	    	window.location.pathname = "/produto";
 	    };
 	</script>
+	<script src="/js/jquery-3.5.1.js"></script>
+	<script src="/js/produtoAcao.js"></script>
 </section>
 </html>

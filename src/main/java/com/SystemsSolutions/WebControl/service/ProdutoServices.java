@@ -1,6 +1,7 @@
 package com.SystemsSolutions.WebControl.service;
 
 import java.util.Date;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -23,7 +24,6 @@ public class ProdutoServices {
 	}
 
 	public void salvar(Produto produto) {
-		
 		String usuario = usuarioServices.getUsuarioAutenticado();
 		Date data = new Date(System.currentTimeMillis());
 		
@@ -41,6 +41,19 @@ public class ProdutoServices {
 
 	public boolean produtoExiste(@Valid Produto produto) {
 		return (buscaPorCodigo(produto.getCodigo()) != null);
+	}
+
+	public void editar(Produto produto) {
+		String usuario = usuarioServices.getUsuarioAutenticado();
+		Optional<Produto> produtoTemp = produtoRepository.findById(produto.getId_produto());
+		Date data = new Date(System.currentTimeMillis());
+		
+		produto.setDataCadastro(produtoTemp.get().getDataCadastro());
+		produto.setUsuarioCadastro(produtoTemp.get().getUsuarioCadastro());
+		produto.setDataAlteracao(data);
+		produto.setHoraAlteracao(data);
+		produto.setUsuarioAlteracao(usuario);
+		produtoRepository.save(produto);
 	}
 	
 }

@@ -2,6 +2,7 @@ package com.SystemsSolutions.WebControl.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -77,6 +78,29 @@ public class ProdutoController {
 	public String excluir(@PathVariable Long codigo) {
 		produtoServices.deletar(codigo);
 		return REDIRECT_PRODUTO_LISTA;
+	}
+	
+	@RequestMapping(value="/{idProduto}")
+	public ModelAndView editar(@PathVariable Long idProduto) {
+		ModelAndView mv = new ModelAndView(PRODUTO_ACAO);
+		Optional<Produto> produto = produtoRepository.findById(idProduto);
+		
+		mv.addObject("action", "editar");
+		mv.addObject(produto.get());
+		return mv;
+	}
+	
+	@RequestMapping(value="editar/{codigo}", method = RequestMethod.PUT)
+	public ModelAndView editarPruduto(@Validated Produto produto, Errors erros, RedirectAttributes attributes) {
+		ModelAndView mv = new ModelAndView(PRODUTO_ACAO);
+		if(erros.hasErrors()) {
+			mv.addObject(produto);
+			mv.addObject("action", "editar");
+			return mv;
+		}
+		produtoServices.editar(produto);
+		mv.setViewName(REDIRECT_PRODUTO_LISTA);
+		return mv;
 	}
 	
 	@ModelAttribute("todasUnidadeMedida")

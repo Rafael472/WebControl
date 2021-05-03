@@ -3,8 +3,8 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<div th:class="${classe}" th:if="${!#strings.isEmpty(mensagem)}">
-	<span th:text="${mensagem}"></span>
+<div id="msgGeralClass" th:class="${classe}" th:if="${!#strings.isEmpty(mensagem)}">
+	<span id="msgGeral" th:text="${mensagem}"></span>
 </div>
 
 </html>
