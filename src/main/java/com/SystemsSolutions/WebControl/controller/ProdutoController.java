@@ -31,6 +31,7 @@ public class ProdutoController {
 	private static final String REDIRECT_PRODUTO_LISTA = "redirect:/produto";
 	private static final String REDIRECT_PRODUTO_NOVO = "redirect:/produto/novo";
 	
+	
 	@Autowired ProdutoRepository produtoRepository;
 	@Autowired UnidadeMedidaRepository unidadeMedidaRepository;
 	@Autowired ProdutoServices produtoServices;
@@ -74,13 +75,13 @@ public class ProdutoController {
 		return mv;
 	}
 	
-	@RequestMapping(value="excluir/{codigo}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "excluir/{codigo}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Long codigo) {
 		produtoServices.deletar(codigo);
 		return REDIRECT_PRODUTO_LISTA;
 	}
 	
-	@RequestMapping(value="/{idProduto}")
+	@RequestMapping(value = "/{idProduto}")
 	public ModelAndView editar(@PathVariable Long idProduto) {
 		ModelAndView mv = new ModelAndView(PRODUTO_ACAO);
 		Optional<Produto> produto = produtoRepository.findById(idProduto);
@@ -90,7 +91,7 @@ public class ProdutoController {
 		return mv;
 	}
 	
-	@RequestMapping(value="editar/{codigo}", method = RequestMethod.PUT)
+	@RequestMapping(value = "editar/{codigo}", method = RequestMethod.PUT)
 	public ModelAndView editarPruduto(@Validated Produto produto, Errors erros, RedirectAttributes attributes) {
 		ModelAndView mv = new ModelAndView(PRODUTO_ACAO);
 		if(erros.hasErrors()) {
@@ -103,7 +104,7 @@ public class ProdutoController {
 		return mv;
 	}
 	
-	@ModelAttribute("todasUnidadeMedida")
+	@ModelAttribute("todasUnidadesMedida")
 	public List<UnidadeMedida> todasUnidadeMedida() {
 		return unidadeMedidaRepository.findAll();
 	}

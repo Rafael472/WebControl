@@ -27,7 +27,7 @@
 			  	<div class="col form-group col-sm-3">
 				    <label for="txtUnidadeMedida">Unidade de Medida</label>
 				    <select class="form-control form-control-sm" th:classappend="${#fields.hasErrors('unidadeMedida')} ? is-invalid" id="txtUnidadeMedida" th:field="*{unidadeMedida}">
-			      		<option th:each="unidadeMedida : ${todasUnidadeMedida}" th:value="${unidadeMedida.sigla}" th:text="${unidadeMedida.sigla}"></option>
+			      		<option th:each="unidadeMedida : ${todasUnidadesMedida}" th:value="${unidadeMedida.sigla}" th:text="${unidadeMedida.sigla}"></option>
 			    	</select>
 		  		</div>
 		  		<div class="col form-group col-sm-3">

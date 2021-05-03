@@ -52,14 +52,14 @@ public class Produto {
 	@NotNull(message = "Quantidade é obrigatória")
 	@DecimalMin(value = "0.0001", message = "Quantidade não pode ser menor que 0,0001")
 	@DecimalMax(value = "99999999.9999", message = "Quantidade não pode ser maior que 99.999.999,9999")
-	@NumberFormat(pattern = "#,##0.00")
+	@NumberFormat(pattern = "#,##0.00##")
 	@Column(name = "QUANTIDADE", unique = false, nullable = false)
 	private double quantidade;
 	
 	@NotNull(message = "Valor é obrigatório")
 	@DecimalMin(value = "0.01", message = "Valor não pode ser menor que R$0,01")
 	@DecimalMax(value = "99999999.9999", message = "Valor não pode ser maior que R$99.999.999,9999")
-	@NumberFormat(pattern = "#,##0.00")
+	@NumberFormat(pattern = "#,##0.00##")
 	@Column(name = "VALOR", unique = false, nullable = false)
 	private double valor;
 	
