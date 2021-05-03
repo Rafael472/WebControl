@@ -33,8 +33,8 @@ private static final String USUARIO_PERMISSOES_ACAO = "UsuarioPerfilAcao";
 		if(usuario.isPresent()) {
 			mv.addObject("perfis", perfilRepository.findAll());
 			mv.addObject("perfisUsuario", usuario.get().getPerfis());
-			mv.addObject("usuarioId", usuario.get().getId_Usuario());
-			mv.addObject("usuario", usuario.get().getUsuario());
+			mv.addObject("usuarioId", usuario.get().getId_usuario());
+			mv.addObject("usuario", usuario.get().getUsername());
 		}
 		return mv;
 	}

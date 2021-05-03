@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,13 +34,13 @@ public class Usuario {
 	
 	@Column(name = "USUARIO", unique = true, nullable = false)
 	@NotBlank(message = "Usuario é obrigatório")
-	private String usuario;
+	private String username;
 	
 	@JsonIgnore
 	@Column(name = "SENHA", nullable = false)
-	@NotNull
 	private String senha;
 	
+	@NotBlank(message = "Email é obrigatório")
 	@Column(name = "EMAIL", nullable = false)
 	private String email;
 	
@@ -81,42 +80,28 @@ public class Usuario {
 	public void setHoraAlteracao(Date horaAlteracao) {
 		this.horaAlteracao = horaAlteracao;
 	}
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "STATUS", nullable = false)
+	private StatusUsuario status;
+
 	public Long getId_usuario() {
 		return id_usuario;
 	}
 	public void setId_usuario(Long id_usuario) {
 		this.id_usuario = id_usuario;
 	}
-
-
-	@Enumerated(EnumType.STRING)
-	@Column(name = "STATUS", nullable = false)
-	private StatusUsuario status;
-
-	
-	public Long getId_Usuario() {
-		return id_usuario;
+	public String getUsername() {
+		return username;
 	}
-	public void setId_Usuario(Long usuario_id) {
-		this.id_usuario = usuario_id;
-	}
-	public String getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getSenha() {
 		return senha;
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	public StatusUsuario getStatus() {
-		return status;
-	}
-	public void setStatus(StatusUsuario status) {
-		this.status = status;
 	}
 	public String getEmail() {
 		return email;
@@ -127,7 +112,6 @@ public class Usuario {
 	public List<Perfil> getPerfis() {
 		return perfis;
 	}
-
 	public void setPerfis(List<Perfil> perfis) {
 		this.perfis = perfis;
 	}
@@ -137,7 +121,12 @@ public class Usuario {
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-	
+	public StatusUsuario getStatus() {
+		return status;
+	}
+	public void setStatus(StatusUsuario status) {
+		this.status = status;
+	}
 	public boolean isAtivo(){
 		return StatusUsuario.ATIVO.equals(this.status);
 	}

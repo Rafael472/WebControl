@@ -3,11 +3,10 @@ package com.SystemsSolutions.WebControl.controller;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +49,7 @@ public class ProdutoController {
 	}
 	
 	@RequestMapping(value = "/salvarProduto", method = RequestMethod.POST)
-	public ModelAndView salvar(@Valid Produto produto, Errors erros, RedirectAttributes attributes) {
+	public ModelAndView salvar(@Validated Produto produto, Errors erros, RedirectAttributes attributes) {
 		ModelAndView mv = new ModelAndView(PRODUTO_ACAO);
 		if(erros.hasErrors()) {
 			return mv;
@@ -70,7 +69,6 @@ public class ProdutoController {
 			attributes.addFlashAttribute("classe", "alert alert-danger");
 			attributes.addFlashAttribute("mensagem", ex.getMessage());
 		}
-		
 		mv.setViewName(REDIRECT_PRODUTO_NOVO);
 		return mv;
 	}

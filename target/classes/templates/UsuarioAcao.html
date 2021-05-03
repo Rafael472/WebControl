@@ -12,23 +12,22 @@
 		<div th:replace="MensagemGeral"></div>
     	<div th:replace="MensagemErro"></div>
 		<div class="card-body">
-			<input type="hidden" th:field="*{id_usuario}"/>
 			<div class="form-group">
 			    <label for="txtUsuario">Usuário</label>
-			    <input type="text" class="form-control form-control-sm col-md-6" id="txtUsuario" th:field="*{usuario}" placeholder="Usuario"/>
+			    <input type="text" class="form-control form-control-sm col-md-6" th:classappend="${#fields.hasErrors('username')} ? is-invalid" id="txtUsuario" th:field="*{username}" placeholder="Usuario"/>
 		  	</div>
 		  	<div class="form-group">
 			    <label for="txtSenha">Senha</label>
-			    <input type="password" class="form-control form-control-sm col-md-6" id="txtSenha" th:field="*{senha}" th:placeholder="${action} == 'editar' ? 'Se vazio, Senha permanece a mesma.' : 'Senha'"/>
+			    <input type="password" th:required="${action} == 'editar' ? null : 'required'" class="form-control form-control-sm col-md-6" th:classappend="${#fields.hasErrors()} ? is-invalid" id="txtSenha" th:field="*{senha}" th:placeholder="${action} == 'editar' ? 'Se vazio, Senha permanece a mesma.' : 'Senha'"/>
 		  	</div>
 		  	<div class="form-group">
 			    <label for="txtEmail">E-mail</label>
-			    <input type="email" class="form-control form-control-sm col-md-6" id="txtEmail" th:field="*{email}" placeholder="nome@exemplo.com"/>
+			    <input type="email" class="form-control form-control-sm col-md-6" th:classappend="${#fields.hasErrors('email')} ? is-invalid" id="txtEmail" th:field="*{email}" placeholder="nome@exemplo.com"/>
 		  	</div>
 		  	<div class="form-group" th:if="${action} != editar">
 				<label for="dataCadastro" class="">Data de Cadastro</label>
 				<div>
-					<input type="text" class="form-control form-control-sm col-sm-2"	id="dataCadastro" th:field="*{dataCadastro}"
+					<input type="text" th:required="${action} == 'editar' ? null : 'required'" class="form-control form-control-sm col-sm-2 datepicker" th:classappend="${#fields.hasErrors('dataCadastro')} ? is-invalid" id="dataCadastro" th:field="*{dataCadastro}"
 						data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
 						data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="auto"
 						placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" />
@@ -36,7 +35,7 @@
 			</div>
 		  	<div class="form-group">
 		    	<label for="ddlSituacao">Situação</label>
-		    	<select class="form-control form-control-sm col-sm-2" id="ddlSituacao" th:field="*{status}">
+		    	<select class="form-control form-control-sm col-sm-2" th:classappend="${#fields.hasErrors('status')} ? is-invalid" id="ddlSituacao" th:field="*{status}">
 		      		<option th:each="status : ${todosStatusUsuario}" th:value="${status}" th:text="${status.descricao}"></option>
 		    	</select>
 		  	</div>

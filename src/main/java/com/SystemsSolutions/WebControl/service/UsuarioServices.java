@@ -53,14 +53,14 @@ public class UsuarioServices implements UserDetailsService{
 	@Transactional()
 	public void editarPorUsuario(Usuario usuario, Long id) {
 		Date data = new Date(System.currentTimeMillis());
-		usuario.setId_Usuario(id);
+		usuario.setId_usuario(id);
 		usuario.setDataAlteracao(data); //GET DATA
 		usuario.setHoraAlteracao(data); //GET HORA
 		if(!usuario.getSenha().equals("")) { //Se senha não for vazia, salva usuario com a nova senha
 			usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-			repository.EditByUsuario(usuario.getUsuario(), usuario.getSenha(), usuario.getEmail(), usuario.getDataAlteracao(), usuario.getHoraAlteracao(), usuario.getStatus(), id);
+			repository.EditByUsuario(usuario.getUsername(), usuario.getSenha(), usuario.getEmail(), usuario.getDataAlteracao(), usuario.getHoraAlteracao(), usuario.getStatus(), id);
 		}else //senão, salva usuário sem alterar a senha
-			repository.EditByUsuario(usuario.getUsuario(), usuario.getEmail(), usuario.getDataAlteracao(), usuario.getHoraAlteracao(), usuario.getStatus(), id);
+			repository.EditByUsuario(usuario.getUsername(), usuario.getEmail(), usuario.getDataAlteracao(), usuario.getHoraAlteracao(), usuario.getStatus(), id);
 	}
 	
 	//busca usuário por usuário no banco de dados
@@ -93,7 +93,7 @@ public class UsuarioServices implements UserDetailsService{
 		}
 		
 		return new User(
-				usuario.getUsuario(),
+				usuario.getUsername(),
 				usuario.getSenha(),
 				AuthorityUtils.createAuthorityList(getAuthorities(usuario.getPerfis()))
 		);
@@ -123,7 +123,7 @@ public class UsuarioServices implements UserDetailsService{
 	
 	//checa se já existe usuário no banco de dados
 	public Boolean usuarioExiste(Usuario usuario) {
-		return (buscarPorUsuario(usuario.getUsuario()) != null);
+		return (buscarPorUsuario(usuario.getUsername()) != null);
 	}
 
 	public void inserirRelacao(Long idUsuario, Long idPerfil) {

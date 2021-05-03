@@ -3,6 +3,7 @@ package com.SystemsSolutions.WebControl.controller;
 import java.util.Arrays;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -46,15 +47,15 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "/salvarUsuario", method = RequestMethod.POST)
-	public ModelAndView salvar(@ModelAttribute("form") @Validated Usuario usuario, Errors erros, RedirectAttributes attributes) {
+	public ModelAndView salvar(@Validated Usuario usuario, Errors erros, RedirectAttributes attributes) {
 		ModelAndView mv = new ModelAndView(USUARIO_ACAO);
-		if(erros.hasErrors()) {
+		if(erros.hasErrors()) { 
 			return mv;
 		}
 		
 		if(usuarioServices.usuarioExiste(usuario)) {
 			mv.addObject("classe", "alert alert-warning");
-			mv.addObject("mensagem", "Usuário "+ usuario.getUsuario() +" já existe!");
+			mv.addObject("mensagem", "Usuário "+ usuario.getUsername() +" já existe!");
 			return mv;
 		}
 		
@@ -80,7 +81,10 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "editar/{codigo}", method = RequestMethod.PUT)
-	public String editarUsuario(@ModelAttribute("form") @Validated Usuario usuario, @PathVariable Long codigo) {
+	public String editarUsuario(@Validated Usuario usuario, Errors erros, @PathVariable Long codigo) {
+		if(erros.hasErrors()) {
+			return USUARIO_ACAO;
+		}
 		usuarioServices.editarPorUsuario(usuario, codigo);
 		return REDIRECT_USUARIO_LISTA;
 	}

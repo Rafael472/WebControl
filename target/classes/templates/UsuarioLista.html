@@ -30,7 +30,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="usuario : ${todosUsuarios}">
-						<td class="align-middle" th:text="${usuario.usuario}"/>
+						<td class="align-middle" th:text="${usuario.username}"/>
 						<td class="align-middle" th:text="${usuario.email}"/>
 						<td class="text-center align-middle" th:text="${{usuario.dataCadastro}}"/>
 						<td class="text-center align-middle">
@@ -38,14 +38,14 @@
 								th:classappend="${usuario.ativo ? 'bg-success text-white' : usuario.pendente ? 'bg-warning text-dark' : 'bg-danger text-white'}"></span>
 						</td>
 						<td class="text-center">
-							<a class="btn btn-link" title="Editar" th:href="@{/usuario/{codigo}(codigo=${usuario.getId_Usuario()})}" rel="tooltip" data-placement="top">
+							<a class="btn btn-link" title="Editar" th:href="@{/usuario/{codigo}(codigo=${usuario.id_usuario})}" rel="tooltip" data-placement="top">
 								<span class="bi bi-pencil"></span>
 							</a>
-							<a class="btn btn-link bibi-key" title="Permissões" th:href="@{/perfis/{codigo}(codigo=${usuario.getId_Usuario()})}" rel="tooltip" data-placement="top">
+							<a class="btn btn-link bibi-key" title="Permissões" th:href="@{/perfis/{codigo}(codigo=${usuario.id_usuario})}" rel="tooltip" data-placement="top">
 								<span class="bi bi-key"></span>
 							</a>
 							<a type="button" class="btn btn-link text-danger" title="Excluir" data-toggle="modal" data-target="#exclusaoModal"
-								th:attr="data-codigo=${usuario.getId_Usuario()}, data-usuario=${usuario.usuario}" rel="tooltip" data-placement="top">
+								th:attr="data-codigo=${usuario.id_usuario}, data-usuario=${usuario.username}" rel="tooltip" data-placement="top">
 								<span class="bi bi-trash"></span>
 							</a>
 						</td>

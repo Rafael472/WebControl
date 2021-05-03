@@ -14,7 +14,7 @@ import com.SystemsSolutions.WebControl.model.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	
-	@Query("SELECT u FROM Usuario u WHERE u.usuario = :usuarioParam")
+	@Query("SELECT u FROM Usuario u WHERE u.username = :usuarioParam")
 	Usuario findByUsuario(@Param("usuarioParam") String usuario);
 	
 	@Query("SELECT u FROM Usuario u WHERE u.email = :emailParam")
@@ -23,7 +23,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	//edita usuario sem alterar senha
 	@Modifying
 	@Query("UPDATE Usuario u "
-			+ "SET u.usuario 		= :usuarioParam"
+			+ "SET u.username 		= :usuarioParam"
 			+ ", u.email 			= :emailParam"
 			+ ", u.dataAlteracao 	= :dataAltParam"
 			+ ", u.horaAlteracao 	= :horaAltParam"
@@ -39,7 +39,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	//edita usuario alterando senha
 	@Modifying
 	@Query("UPDATE Usuario u "
-			+ "SET u.usuario 		= :usuarioParam"
+			+ "SET u.username 		= :usuarioParam"
 			+ ", u.senha			= :senhaParam"
 			+ ", u.email 			= :emailParam"
 			+ ", u.dataAlteracao 	= :dataAltParam"

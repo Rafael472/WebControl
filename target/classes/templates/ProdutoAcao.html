@@ -7,7 +7,7 @@
 	<title>Cadastro Produtos</title>
 </head>
 <section layout:fragment="conteudo">
-	<form class="card" th:method="${action} == editar ? 'PUT' : 'POST'" th:action="${action} == 'editar' ? @{/produto/editar/{codigo}(codigo=${produto.getId_Produto()})} : @{/produto/salvarProduto}" th:object="${produto}">
+	<form class="card" th:method="${action} == editar ? 'PUT' : 'POST'" th:action="${action} == 'editar' ? @{/produto/editar/{codigo}(codigo=${produto.id_produto})} : @{/produto/salvarProduto}" th:object="${produto}">
 		<h5 class="card-header">Cadastro de Produtos</h5>
 		<div th:replace="MensagemGeral"></div>
     	<div th:replace="MensagemErro"></div>
