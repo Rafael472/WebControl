@@ -15,12 +15,10 @@
 		          Administrador
 		        </a>
 		        <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdown">
-	        		<li class="nav-link dropdown">
-						<a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Usuario</a>
+	        		<li class="dropdown">
+						<a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Cadastro</a>
 			          	<ul class="dropdown-menu">
-			          		<li class="nav-link dropdown">
-				          		<a class="dropdown-item" href="/usuario">Cadastro</a>
-				          	</li>
+			          		<li><a class="dropdown-item" href="/usuario">Usuario</a></li>
 			          	</ul>
 					</li>
 					<!-- ADICIONAR <li> ABAIXO (ANTES DO </ul>) PARA MAIS LINHAS NO MENU -->
@@ -31,13 +29,13 @@
 		          Produto
 		        </a>
 		        <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdown">
-		        	<li class="nav-link dropdown">
+		        	<li class="dropdown">
 			        	<a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Cadastro</a>
 			        	<ul class="dropdown-menu">
-			        		<li class="nav-link dropdown">
-								<a class="dropdown-item" href="/produto">Produto</a>
-							</li>
-							<li class="nav-link dropdown" sec:authorize="hasAnyAuthority('ADMIN','UNIDADE_MEDIDA')">
+			        		<li sec:authorize="hasAnyAuthority('ADMIN','PRODUTO')">
+			        			<a class="dropdown-item" href="/produto">Produto</a>
+			        		</li>
+							<li sec:authorize="hasAnyAuthority('ADMIN','UNIDADE_MEDIDA')">
 								<a class="dropdown-item" href="/unidadeMedida">Unidade Medida</a>
 							</li>
 						</ul>
@@ -72,13 +70,9 @@
 		display: block;
 		margin-top: 0px;
 		margin-left: 0px;
-		padding: 0pt;
 	}
 	.dropdown>.dropdown-toggle:active {
 		pointer-events: none;
-	}
-	.dropdown-item:hover {
-		border-radius: 3px;
 	}
 </style>
 </html>
