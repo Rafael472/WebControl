@@ -26,7 +26,7 @@
 					<!-- ADICIONAR <li> ABAIXO (ANTES DO </ul>) PARA MAIS LINHAS NO MENU -->
 		        </ul>
 	        </li>
-	        <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ADMIN','PRODUTO')">
+	        <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ADMIN','PRODUTO','UNIDADE_MEDIDA')">
 		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		          Produto
 		        </a>
@@ -37,7 +37,7 @@
 			        		<li class="nav-link dropdown">
 								<a class="dropdown-item" href="/produto">Produto</a>
 							</li>
-							<li class="nav-link dropdown">
+							<li class="nav-link dropdown" sec:authorize="hasAnyAuthority('ADMIN','UNIDADE_MEDIDA')">
 								<a class="dropdown-item" href="/unidadeMedida">Unidade Medida</a>
 							</li>
 						</ul>
