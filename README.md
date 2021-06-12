@@ -6,7 +6,7 @@
 - Login
 - Cadastro de Usuarios
 - Cadastro de Produtos
-- Cadsatro de Unidades de Medida
+- Cadastro de Unidades de Medida
 
 # Implementações Futuras
 - Cadastro de Clientes
