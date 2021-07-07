@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.SystemsSolutions.WebControl.enums.StatusProduto;
 import com.SystemsSolutions.WebControl.model.Produto;
-import com.SystemsSolutions.WebControl.model.StatusProduto;
 import com.SystemsSolutions.WebControl.model.UnidadeMedida;
 import com.SystemsSolutions.WebControl.repository.ProdutoRepository;
 import com.SystemsSolutions.WebControl.repository.UnidadeMedidaRepository;

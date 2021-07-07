@@ -4,7 +4,7 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 		layout:decorate="~{LayoutPadrao}">
 <head>
-	<title>Cadastro Usuarios</title>
+	<title>Unidade de Medida | WebControl</title>
 </head>
 <section layout:fragment="conteudo">
 	<form class="card" th:method="${action} == editar ? 'PUT' : 'POST'" th:action="${action} == 'editar' ? @{/unidadeMedida/editar/} : @{/unidadeMedida/salvarUnidade}" th:object="${unidadeMedida}">

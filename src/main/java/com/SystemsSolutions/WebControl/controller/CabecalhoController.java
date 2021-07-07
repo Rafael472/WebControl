@@ -25,7 +25,6 @@ public class CabecalhoController {
 			attributes.addFlashAttribute("usuario", usuario[0]);
 			attributes.addFlashAttribute("empresa", usuario[1]);
 		}
-		System.out.println("Passou por aqui!   cabecalhocontroller");
 		return paginaRedirect;
 	}
 	

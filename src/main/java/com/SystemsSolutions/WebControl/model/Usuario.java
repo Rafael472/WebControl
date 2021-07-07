@@ -21,6 +21,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.SystemsSolutions.WebControl.enums.StatusUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

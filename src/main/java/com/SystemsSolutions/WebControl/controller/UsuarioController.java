@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.SystemsSolutions.WebControl.model.StatusUsuario;
+import com.SystemsSolutions.WebControl.enums.StatusUsuario;
 import com.SystemsSolutions.WebControl.model.Usuario;
 import com.SystemsSolutions.WebControl.repository.UsuarioRepository;
 import com.SystemsSolutions.WebControl.service.UsuarioServices;

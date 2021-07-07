@@ -4,7 +4,7 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 		layout:decorate="~{LayoutPadrao}">
 <head>
-	<title>Cadastro Usuarios</title>
+	<title>Usuario | WebControl</title>
 </head>
 <section layout:fragment="conteudo">
 	<form class="card" th:method="${action} == editar ? 'PUT' : 'POST'" th:action="${action} == 'editar' ? @{/usuario/editar/{codigo}(codigo=${usuario.id_usuario})} : @{/usuario/salvarUsuario}" th:object="${usuario}">

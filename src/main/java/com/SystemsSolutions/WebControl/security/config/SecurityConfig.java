@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/usuario/**", "/perfis/**").hasAuthority("ADMIN") //Autoriza qualquer ADMIN a entrar em paginas com /usuario/ na URI
 			.antMatchers("/produto/**").hasAnyAuthority("ADMIN","PRODUTO")
 			.antMatchers("/unidadeMedida/**").hasAnyAuthority("ADMIN","UNIDADE_MEDIDA")
+			.antMatchers("/vendas/faturamento/**").hasAnyAuthority("ADMIN","FATURAMENTO")
 			.anyRequest().authenticated()
 			.and()
 				.formLogin()

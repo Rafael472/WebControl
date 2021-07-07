@@ -21,6 +21,8 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import com.SystemsSolutions.WebControl.enums.StatusProduto;
+
 @Entity
 @Table(name="PRODUTO")
 public class Produto {

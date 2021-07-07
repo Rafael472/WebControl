@@ -4,7 +4,7 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 		layout:decorate="~{LayoutPadrao}">
 <head>
-	<title>Produtos | WebControl</title>
+	<title>Faturamento | WebControl</title>
 </head>
 <section layout:fragment="conteudo">
 	<div th:class="${classe}" th:if="${!#strings.isEmpty(mensagem)}">
@@ -12,44 +12,39 @@
 	</div>
 	<form class="card" method="POST" action="">
 		<div class="card-header">
-			<h5>Cadastro de Produtos</h5>
+			<h5>Faturamento</h5>
 		</div>
 		<div class="card-body">
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary" formaction="/produto/novo">Adicionar</button>
 			</div>
-			<table id="table" class="table">
+			<table id="table" class="table hover">
 				<thead>
 					<tr>
-						<th scope="row">Código</th>
-						<th class="text-left" scope="col">Nome</th>
-						<th class="text-left" scope="col">Unid. Medida</th>
-						<th class="text-right" scope="col">Valor</th>
-						<th class="text-center" scope="col">Data Cadastro</th>
-						<th class="text-center" scope="col">Situação</th>
-						<th class="text-center" scope="col">Ações</th>
+						<th class="align-middle text-center" scope="col">Ações</th>
+						<th class="align-middle text-center">Código</th>
+						<th class="align-middle text-center" scope="col">Data Cadastro</th>
+						<th class="align-middle text-center" scope="col">Data Emissão</th>
+						<th class="align-middle text-center" scope="col">Valor</th>
+						<th class="align-middle text-center" scope="col">Cliente</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="produto : ${todosProdutos}">
-						<td class="align-middle" th:text="${produto.codigo}"/>
-						<td class="align-middle" th:text="${produto.nome}"/>
-						<td class="align-middle" th:text="${{produto.unidadeMedida}}"/>
-						<td class="align-middle text-right" th:text="|R$ ${{produto.valor}}|"/>
-						<td class="align-middle text-center " th:text="${{produto.dataCadastro}}"/>
-						<td class="align-middle text-center ">
-							<span class="badge " th:text="${produto.status.descricao}"
-								th:classappend="${produto.ativo ? 'bg-success text-white' : produto.pendente ? 'bg-warning text-dark' : 'bg-danger text-white'}"></span>
-						</td>
+					<tr th:each="faturamento : ${todosFaturamentos}">
 						<td class="align-middle text-center">
-							<a class="btn btn-link" title="Editar" th:href="@{/produto/{codigo}(codigo=${produto.getId_produto()})}" rel="tooltip" data-placement="top">
+							<a class="btn btn-link" title="Editar" th:href="@{/faturamento/{codigo}(codigo=${faturamento.getId()})}" rel="tooltip" data-placement="top">
 								<span class="bi bi-pencil"></span>
 							</a>
 							<a type="button" class="btn btn-link text-danger" title="Excluir" data-toggle="modal" data-target="#exclusaoModal"
-								th:attr="data-codigo=${produto.getId_produto()}, data-produto=${produto.codigo}" rel="tooltip" data-placement="top">
+								th:attr="data-codigo=${faturamento.getId()}" rel="tooltip" data-placement="top">
 								<span class="bi bi-trash"></span>
 							</a>
 						</td>
+						<td class="align-middle text-center " th:text="${faturamento.id}"/>
+						<td class="align-middle text-center " th:text="${{faturamento.dataCadastro}}"/>
+						<td class="align-middle text-center " th:text="${{faturamento.dataEmissao}}"/>
+						<td class="align-middle text-center" th:text="|R$ ${{faturamento.valor}}|"/>
+						<td class="align-middle text-left " th:text="${faturamento.cliente}"/>
 					</tr>
 					
 				</tbody>
@@ -60,7 +55,7 @@
 	<!-- Modal -->
 	<div class="modal fade" id="exclusaoModal" tabindex="-1" onLoad="jsAbreModal();" aria-labelledby="exclusaoModalLabel" aria-hidden="true">
   		<div class="modal-dialog">
-  			<form th:attr="data-url='/produto/excluir'" method="POST" th:method="DELETE">
+  			<form th:attr="data-url='/faturamento/excluir'" method="POST" th:method="DELETE">
 		    	<div class="modal-content">
 		      		<div class="modal-header">
 		        		<h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
@@ -69,7 +64,7 @@
 	        			</button>
 		      		</div>
 					<div class="modal-body">
-						Deseja excluir o produto ... ?
+						Deseja excluir o faturamento ... ?
 					</div>
 	      			<div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

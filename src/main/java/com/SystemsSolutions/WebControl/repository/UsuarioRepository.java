@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.SystemsSolutions.WebControl.model.StatusUsuario;
+import com.SystemsSolutions.WebControl.enums.StatusUsuario;
 import com.SystemsSolutions.WebControl.model.Usuario;
 
 @Repository
