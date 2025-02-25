@@ -1,8 +1,11 @@
 package com.SystemsSolutions.WebControl.model;
 
-import java.io.Serializable;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
 @SuppressWarnings("serial")
 @MappedSuperclass

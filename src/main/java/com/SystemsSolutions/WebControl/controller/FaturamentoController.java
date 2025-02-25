@@ -1,15 +1,14 @@
 package com.SystemsSolutions.WebControl.controller;
 
-import java.util.List;
-
+import com.SystemsSolutions.WebControl.model.Faturamento;
+import com.SystemsSolutions.WebControl.repository.FaturamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.SystemsSolutions.WebControl.model.Faturamento;
-import com.SystemsSolutions.WebControl.repository.FaturamentoRepository;
+import java.util.List;
 
 @Controller
 @RequestMapping("/faturamento")

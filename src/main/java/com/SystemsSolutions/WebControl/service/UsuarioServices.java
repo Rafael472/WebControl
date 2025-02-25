@@ -1,9 +1,9 @@
 package com.SystemsSolutions.WebControl.service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
+import com.SystemsSolutions.WebControl.model.Perfil;
+import com.SystemsSolutions.WebControl.model.Usuario;
+import com.SystemsSolutions.WebControl.repository.PerfilRepository;
+import com.SystemsSolutions.WebControl.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -16,13 +16,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.SystemsSolutions.WebControl.model.Perfil;
-import com.SystemsSolutions.WebControl.model.Usuario;
-import com.SystemsSolutions.WebControl.repository.PerfilRepository;
-import com.SystemsSolutions.WebControl.repository.UsuarioRepository;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UsuarioServices implements UserDetailsService{
+public class UsuarioServices implements UserDetailsService {
 	
 	@Autowired
 	private UsuarioRepository repository;
@@ -92,12 +91,13 @@ public class UsuarioServices implements UserDetailsService{
 			usuario = null;
 		}
 		
-		return new User(
-				usuario.getUsername(),
-				usuario.getSenha(),
-				AuthorityUtils.createAuthorityList(getAuthorities(usuario.getPerfis()))
-		);
+		return User.builder()
+				.username(usuario.getUsername())
+				.password(usuario.getSenha())
+				.roles(getAuthorities(usuario.getPerfis()))
+				.build();
 	}
+
 	//converte lista de perfis para array string
 	private String[] getAuthorities(List<Perfil> perfis) {
 		String[] authorities = new String[perfis.size()];

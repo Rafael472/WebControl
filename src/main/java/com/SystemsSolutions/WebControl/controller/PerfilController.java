@@ -1,7 +1,9 @@
 package com.SystemsSolutions.WebControl.controller;
 
-import java.util.Optional;
-
+import com.SystemsSolutions.WebControl.model.Usuario;
+import com.SystemsSolutions.WebControl.repository.PerfilRepository;
+import com.SystemsSolutions.WebControl.repository.UsuarioRepository;
+import com.SystemsSolutions.WebControl.service.UsuarioServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.SystemsSolutions.WebControl.model.Usuario;
-import com.SystemsSolutions.WebControl.repository.PerfilRepository;
-import com.SystemsSolutions.WebControl.repository.UsuarioRepository;
-import com.SystemsSolutions.WebControl.service.UsuarioServices;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/perfis")

@@ -1,13 +1,12 @@
 package com.SystemsSolutions.WebControl.controller;
 
-import java.util.List;
-
+import com.SystemsSolutions.WebControl.model.Perfil;
+import com.SystemsSolutions.WebControl.repository.PerfilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.SystemsSolutions.WebControl.model.Perfil;
-import com.SystemsSolutions.WebControl.repository.PerfilRepository;
+import java.util.List;
 
 @ControllerAdvice
 public class GlobalController {

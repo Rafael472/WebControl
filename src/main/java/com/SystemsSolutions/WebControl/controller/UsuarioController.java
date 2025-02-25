@@ -1,9 +1,9 @@
 package com.SystemsSolutions.WebControl.controller;
 
-import java.util.Arrays;
-import java.util.List;
-
-
+import com.SystemsSolutions.WebControl.enums.StatusUsuario;
+import com.SystemsSolutions.WebControl.model.Usuario;
+import com.SystemsSolutions.WebControl.repository.UsuarioRepository;
+import com.SystemsSolutions.WebControl.service.UsuarioServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.SystemsSolutions.WebControl.enums.StatusUsuario;
-import com.SystemsSolutions.WebControl.model.Usuario;
-import com.SystemsSolutions.WebControl.repository.UsuarioRepository;
-import com.SystemsSolutions.WebControl.service.UsuarioServices;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/usuario")

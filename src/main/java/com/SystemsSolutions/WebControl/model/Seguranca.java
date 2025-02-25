@@ -1,11 +1,9 @@
 package com.SystemsSolutions.WebControl.model;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.SystemsSolutions.WebControl.service.SegurancaServices;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class Seguranca {
 	

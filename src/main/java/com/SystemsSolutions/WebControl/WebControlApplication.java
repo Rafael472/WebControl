@@ -1,18 +1,24 @@
 package com.SystemsSolutions.WebControl;
 
-import java.util.Locale;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.FixedLocaleResolver;
+
+import java.util.Locale;
 
 @SpringBootApplication
 public class WebControlApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WebControlApplication.class, args);
+
+		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		//var f = encoder.encode("ADMIN");
+		//var f = encoder.matches("ADMIN", "$2a$10$njFErLNBebmA1qrQEBDHbu.DdUFqY4mNOUoTFOL41mFhwEZO45Vgy");
+		//System.out.println(f);
 	}
 	
 	@Bean
