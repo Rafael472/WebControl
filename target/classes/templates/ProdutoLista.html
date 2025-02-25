@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:th="http://www.thymeleaf.org"
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 		layout:decorate="~{LayoutPadrao}">
 <head>
 	<title>Produtos | WebControl</title>
@@ -11,6 +12,7 @@
 		<span th:text="${mensagem}">Mensagem vem do Controller</span>
 	</div>
 	<form class="card" method="POST" action="">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 		<div class="card-header">
 			<h5>Cadastro de Produtos</h5>
 		</div>
@@ -36,10 +38,10 @@
 						<td class="align-middle" th:text="${produto.nome}"/>
 						<td class="align-middle" th:text="${{produto.unidadeMedida}}"/>
 						<td class="align-middle text-right" th:text="|R$ ${{produto.valor}}|"/>
-						<td class="align-middle text-center " th:text="${{produto.dataCadastro}}"/>
+						<td class="align-middle text-center " th:text="${#dates.format(produto.dataCadastro, 'dd/MM/yyyy HH:mm')}"/>
 						<td class="align-middle text-center ">
-							<span class="badge " th:text="${produto.status.descricao}"
-								th:classappend="${produto.ativo ? 'bg-success text-white' : produto.pendente ? 'bg-warning text-dark' : 'bg-danger text-white'}"></span>
+							<span th:class="${produto.ativo} ? 'badge bg-success' : 'badge bg-danger'"
+								  th:text="${produto.ativo} ? 'Ativo' : 'Inativo'"></span>
 						</td>
 						<td class="align-middle text-center">
 							<a class="btn btn-link" title="Editar" th:href="@{/produto/{codigo}(codigo=${produto.getId_produto()})}" rel="tooltip" data-placement="top">
@@ -61,6 +63,7 @@
 	<div class="modal fade" id="exclusaoModal" tabindex="-1" onLoad="jsAbreModal();" aria-labelledby="exclusaoModalLabel" aria-hidden="true">
   		<div class="modal-dialog">
   			<form th:attr="data-url='/produto/excluir'" method="POST" th:method="DELETE">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 		    	<div class="modal-content">
 		      		<div class="modal-header">
 		        		<h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
