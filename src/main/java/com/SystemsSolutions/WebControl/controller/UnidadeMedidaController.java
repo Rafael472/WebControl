@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,21 +26,21 @@ public class UnidadeMedidaController {
 	
 	@Autowired UnidadeMedidaRepository unidadeMedidaRepository;
 	@Autowired UnidadeMedidaServices unidadeMedidaServices;
-	
-	@RequestMapping(value = {"","/"})
+
+	@GetMapping({"","/"})
 	public ModelAndView unidadeMedida() {
 		ModelAndView mv = new ModelAndView(UNIDADE_MEDIDA_LISTA);
 		return mv;
 	}
 	
-	@RequestMapping(value = "/novo")
+	@GetMapping("/novo")
 	public ModelAndView unidadeMedidaNovo() {
 		ModelAndView mv = new ModelAndView(UNIDADE_MEDIDA_ACAO);
 		mv.addObject(new UnidadeMedida());
 		return mv;
 	}
 	
-	@RequestMapping(value = "/salvarUnidade", method = RequestMethod.POST)
+	@PostMapping("/salvarUnidade")
 	public ModelAndView unidadeMedidaSalvar(@Validated UnidadeMedida unidadeMedida, Errors erros, RedirectAttributes attributes) {
 		ModelAndView mv = new ModelAndView(UNIDADE_MEDIDA_ACAO);
 		if(erros.hasErrors()) {
@@ -66,8 +63,8 @@ public class UnidadeMedidaController {
 		mv.setViewName(REDIRECT_UNIDADE_MEDIDA_NOVO);
 		return mv;
 	}
-	
-	@RequestMapping(value = "/{idUnidade}")
+
+	@GetMapping("/{idUnidade}")
 	public ModelAndView editar(@PathVariable Long idUnidade) {
 		ModelAndView mv = new ModelAndView(UNIDADE_MEDIDA_ACAO);
 		Optional<UnidadeMedida> unidade = unidadeMedidaRepository.findById(idUnidade);
@@ -77,7 +74,7 @@ public class UnidadeMedidaController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/editar/", method = RequestMethod.PUT)
+	@PutMapping("/editar/")
 	public ModelAndView editarUnidade(@Validated UnidadeMedida unidadeMedida, Errors erros, RedirectAttributes attributes) {
 		ModelAndView mv = new ModelAndView(UNIDADE_MEDIDA_ACAO);
 
@@ -92,7 +89,7 @@ public class UnidadeMedidaController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/excluir/{idUnidade}", method = RequestMethod.DELETE)
+	@DeleteMapping("/excluir/{idUnidade}")
 	public ModelAndView unidadeExcluir(@PathVariable Long idUnidade) {
 		ModelAndView mv = new ModelAndView(REDIRECT_UNIDADE_MEDIDA_LISTA);
 		unidadeMedidaServices.excluir(idUnidade);

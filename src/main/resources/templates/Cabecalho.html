@@ -15,7 +15,7 @@
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav mr-auto">
 		<!-- MENU -->
-			<li class="nav-item dropdown" sec:authorize="hasAuthority('ADMIN')">
+			<li class="nav-item dropdown" sec:authorize="hasAuthority('ROLE_ADMIN')">
 		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		          Administrador
 		        </a>
@@ -29,7 +29,7 @@
 					<!-- ADICIONAR <li> ABAIXO (ANTES DO </ul>) PARA MAIS LINHAS NO MENU -->
 		        </ul>
 	        </li>
-	        <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ADMIN','PRODUTO','UNIDADE_MEDIDA')">
+	        <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_PRODUTO','UNIDADE_MEDIDA')">
 		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		          Produto
 		        </a>
@@ -37,10 +37,10 @@
 		        	<li class="dropdown">
 			        	<a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Cadastros</a>
 			        	<ul class="dropdown-menu">
-			        		<li sec:authorize="hasAnyAuthority('ADMIN','PRODUTO')">
+			        		<li sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_PRODUTO')">
 			        			<a class="dropdown-item" href="/produto">Produto</a>
 			        		</li>
-							<li sec:authorize="hasAnyAuthority('ADMIN','UNIDADE_MEDIDA')">
+							<li sec:authorize="hasAnyAuthority('ROLE_ADMIN','UNIDADE_MEDIDA')">
 								<a class="dropdown-item" href="/unidadeMedida">Unidade Medida</a>
 							</li>
 						</ul>
@@ -48,7 +48,7 @@
 					<!-- ADICIONAR <li> ABAIXO (ANTES DO </ul>) PARA MAIS LINHAS NO MENU -->
 		        </ul>
 	        </li>
-	        <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ADMIN','FATURAMENTO')">
+	        <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ROLE_ADMIN','FATURAMENTO')">
 		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		          Vendas
 		        </a>
@@ -56,10 +56,10 @@
 		        	<li class="dropdown">
 			        	<a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Cadastros</a>
 			        	<ul class="dropdown-menu">
-			        		<li sec:authorize="hasAnyAuthority('ADMIN','CLIENTE')">
+			        		<li sec:authorize="hasAnyAuthority('ROLE_ADMIN','CLIENTE')">
 			        			<a class="dropdown-item" href="/vendas/clientes">Cliente</a>
 			        		</li>
-			        		<li sec:authorize="hasAnyAuthority('ADMIN','PEDIDOS')">
+			        		<li sec:authorize="hasAnyAuthority('ROLE_ADMIN','PEDIDOS')">
 			        			<a class="dropdown-item" href="/vendas/pedidos">Pedidos</a>
 			        		</li>
 						</ul>
@@ -67,7 +67,7 @@
 		        	<li class="dropdown">
 			        	<a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#">Processos</a>
 			        	<ul class="dropdown-menu">
-			        		<li sec:authorize="hasAnyAuthority('ADMIN','FATURAMENTO')">
+			        		<li sec:authorize="hasAnyAuthority('ROLE_ADMIN','FATURAMENTO')">
 			        			<a class="dropdown-item" href="/faturamento">Faturamento</a>
 			        		</li>
 						</ul>
@@ -81,7 +81,7 @@
 			<span sec:authorize="isAuthenticated()" sec:authentication="name"></span>&nbsp;&nbsp;
 			<span sec:authorize="!isAuthenticated()">USUÁRIO NÃO LOGADO!</span>
 			<form id="formSair" th:action="@{/logout}" method="POST">
-				<a id="btnSair" href="#" class="nav-link" style="color: white;">Sair</a>
+				<a id="btnSair" href="/login?logout" class="nav-link" style="color: white;">Sair</a>
 			</form>
 		</div>
 	</div>

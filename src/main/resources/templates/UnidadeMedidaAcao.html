@@ -7,7 +7,9 @@
 	<title>Unidade de Medida | WebControl</title>
 </head>
 <section layout:fragment="conteudo">
-	<form class="card" th:method="${action} == editar ? 'PUT' : 'POST'" th:action="${action} == 'editar' ? @{/unidadeMedida/editar/} : @{/unidadeMedida/salvarUnidade}" th:object="${unidadeMedida}">
+	<form class="card" th:method="${action} == 'editar' ? 'POST' : 'POST'"
+		  th:action="${action} == 'editar' ? @{/unidadeMedida/editar/} : @{/unidadeMedida/salvarUnidade}"
+		  th:object="${unidadeMedida}">
 		<h5 class="card-header">Cadastro de Unidades de Medida</h5>
 		<div th:replace="MensagemGeral"></div>
     	<div th:replace="MensagemErro"></div>
